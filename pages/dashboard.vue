@@ -1,6 +1,8 @@
 <template>
   <div id="pageDashboard">
-    <v-container grid-list-xl fluid>Dashboard</v-container>
+    <v-container grid-list-xl fluid>
+        
+    </v-container>
   </div>
 </template>
 

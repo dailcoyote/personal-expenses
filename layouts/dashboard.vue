@@ -2,6 +2,7 @@
   <div id="appRoot">
     <template>
       <v-app id="inspire" class="app">
+        <app-drawer class="app--drawer"></app-drawer>
         <app-toolbar class="app--toolbar"></app-toolbar>
         <v-content>
           <!-- Page Header -->
@@ -10,8 +11,8 @@
             <nuxt/>
           </div>
           <!-- App Footer -->
-          <v-footer height="auto" class="white pa-3 app--footer">
-            <span class="caption">&copy; {{ new Date().getFullYear() }}</span>
+          <v-footer height="auto" class="pa-3 app--footer">
+            <h5>&copy; {{ new Date().getFullYear() }}. DailCoyote</h5>
             <v-spacer></v-spacer>
             <v-icon color="pink" small>favorite</v-icon>
           </v-footer>
@@ -22,11 +23,13 @@
 </template>
 
 <script>
+import AppDrawer from "@/components/AppDrawer";
 import AppToolbar from "@/components/AppToolbar";
 import PageHeader from "@/components/PageHeader";
 
 export default {
   components: {
+    AppDrawer,
     AppToolbar,
     PageHeader
   },
