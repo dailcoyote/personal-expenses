@@ -1,0 +1,31 @@
+{
+  "name": "my-expenses",
+  "version": "1.0.0",
+  "description": "This application will help me to expense money",
+  "author": "dailcoyote <dailcoyote@gmail.com>",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "cross-env": "^5.2.0",
+    "font-awesome": "^4.7.0",
+    "lodash.truncate": "^4.4.2",
+    "nuxt": "^2.0.0",
+    "roboto-fontface": "^0.10.0",
+    "vuetify": "^1.5.14",
+    "vuetify-loader": "^1.2.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^4.19.1",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-vue": "^4.0.0"
+  }
+}
