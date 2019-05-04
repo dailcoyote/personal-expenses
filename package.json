@@ -5,7 +5,7 @@
   "author": "dailcoyote <dailcoyote@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "nodemon --exec nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -16,8 +16,10 @@
     "cross-env": "^5.2.0",
     "font-awesome": "^4.7.0",
     "lodash.truncate": "^4.4.2",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.6.3",
     "roboto-fontface": "^0.10.0",
+    "vee-validate": "^2.2.5",
+    "vue-perfect-scrollbar": "^0.1.0",
     "vuetify": "^1.5.14",
     "vuetify-loader": "^1.2.2"
   },
@@ -26,6 +28,9 @@
     "eslint": "^4.19.1",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.1",
-    "eslint-plugin-vue": "^4.0.0"
+    "eslint-plugin-vue": "^4.0.0",
+    "nodemon": "^1.19.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2"
   }
 }

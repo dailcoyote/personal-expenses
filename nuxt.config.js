@@ -1,9 +1,12 @@
+const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
+
 module.exports = {
+  mode: 'spa',
   /*
   ** Headers of the page
   */
   head: {
-    title: 'my-expenses',
+    title: 'My Expenses',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -18,22 +21,40 @@ module.exports = {
   */
   loading: { color: '#3B8070' },
   /*
+    ** Global CSS
+    */
+  css: [
+    '~/assets/style/theme.styl',
+    '~/assets/style/app.styl',
+    'font-awesome/css/font-awesome.css',
+    'roboto-fontface/css/roboto/roboto-fontface.css'
+  ],
+
+  /*
+  ** Plugins to load before mounting the App
+  */
+  plugins: [
+    '@/plugins/vuetify',
+    '@/plugins/vee-validate'
+  ],
+
+  /*
+  ** Nuxt.js modules
+  */
+  modules: [],
+
+  /*
   ** Build configuration
   */
   build: {
-    /*
-    ** Run ESLint on save
-    */
-    extend (config, { isDev, isClient }) {
-      if (isDev && isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
+    transpile: ['vuetify/lib'],
+    plugins: [new VuetifyLoaderPlugin()],
+    loaders: {
+      stylus: {
+        import: ["~assets/style/variables.styl"]
       }
-    }
+    },
+
   }
 }
 
