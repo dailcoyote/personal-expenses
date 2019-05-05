@@ -8,14 +8,6 @@ const Menu = [
         href: '/dashboard'
       },
       {
-        title: 'Planning/Finance',
-        group: 'apps',
-        icon: 'chat_bubble',
-        target: '_blank',
-        name: 'Finance',
-        href: '/finance'
-      },
-      {
         title: 'Activities',
         group: 'apps',
         name: 'Activities',
