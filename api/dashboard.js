@@ -9,7 +9,7 @@ const Dashboard = [
     {
         id: "",
         title: "Debt",
-        value: -6444,
+        value: 0,
         currency: "KZT",
         indicatorState: "A"
     },
