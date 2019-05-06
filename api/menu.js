@@ -12,7 +12,7 @@ const Menu = [
         group: 'apps',
         name: 'Activities',
         target: '_blank',
-        icon: 'email',
+        icon: 'list',
         href: '/activity/all'
       }
 ]

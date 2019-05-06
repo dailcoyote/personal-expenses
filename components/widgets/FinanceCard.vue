@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="250">
+  <v-card width="250">
     <div class="layout row ma-0 px-1">
       <div class="text-box align-center justify-space-between">
         <v-card-text>

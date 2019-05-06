@@ -1,7 +1,7 @@
 import DashboardAPI from "@/api/dashboard";
 
 export const state = () => ({
-    dashboardTools: [],
+    dashboardTools: {},
     isLoading: false
 })
 
