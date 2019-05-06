@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import Material from "vuetify/es5/util/colors";
 import FinanceCard from "@/components/widgets/FinanceCard";
 
@@ -36,17 +37,18 @@ export default {
   },
   data: () => ({
     color: Material,
-    selectedTab: "tab-1",
-    isLoading: false
+    selectedTab: "tab-1"
   }),
   created: function() {
-    this.isLoading = true;
+
   },
   mounted: function() {
-    setTimeout(()=> {
-      this.isLoading = false;
-    }, 1200)
-    // this.isLoading = false;
+    this.$store.dispatch('loadDashboardTools')
+  },
+  computed:{
+    ...mapState(['dashboardTools', 'isLoading'])
+    // ...mapActions(['getDashboardTools'])
+    // ...Vuex.mapGetters(['dashboardTools'])
   }
 };
 </script>
