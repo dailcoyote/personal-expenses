@@ -18,11 +18,13 @@ import { _format } from "@/util/formatter";
 
 export default {
   props: {
+    // card: Object
     title: String,
     value: Number,
     currency: String,
     indicatorState: String
   },
+  mounted: function() {},
   computed: {
     indicator: function() {
       return _format(this.value, "0,0");

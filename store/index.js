@@ -1,5 +1,7 @@
+import DashboardAPI from "@/api/dashboard";
+
 export const state = () => ({
-    dashboardTools: {},
+    dashboardTools: [],
     isLoading: false
 })
 
@@ -14,12 +16,9 @@ export const mutations = {
 }
 
 export const actions = {
-    loadDashboardTools(context) {
+    async loadDashboardTools(context) {
         context.commit('API_BEGIN_LOADING');
-        setTimeout(() => {
-            context.commit('API_DATA_LOADED', {
-                foo:1, bar:1
-            })
-        },1200)
+        const tools = await DashboardAPI.getDashboard()
+        context.commit('API_DATA_LOADED', tools);
     }
 }

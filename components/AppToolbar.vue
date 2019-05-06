@@ -60,14 +60,6 @@ export default {
           }
         },
         {
-          icon: 'settings',
-          href: '#',
-          title: 'Settings',
-          click: (e) => {
-            console.log(e);
-          }
-        },
-        {
           icon: 'fullscreen_exit',
           href: '#',
           title: 'Logout',
