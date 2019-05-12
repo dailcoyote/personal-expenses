@@ -5,6 +5,7 @@
     fixed
     :dark="$vuetify.dark"
     app
+    v-model="drawer"
     width="260"
   >
     <v-toolbar color="#40668e" dark>
@@ -67,14 +68,15 @@ export default {
     }
   }),
   computed: {
-    // drawer: {
-    //   get() {
-    //     return this.$store.state.drawer;
-    //   },
-    //   set(val) {
-    //     this.$store.commit("drawer", val);
-    //   }
-    // },
+    drawer: {
+      get() {
+        return this.$store.state.drawer;
+      },
+      set(val) {
+        console.log(val)
+        this.$store.commit("drawer", val);
+      }
+    },
     computeGroupActive() {
       return true;
     },

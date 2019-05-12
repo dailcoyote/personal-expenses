@@ -6,14 +6,14 @@
     app
   >
     <v-toolbar-title class="ml-0 pl-3">
-      <!-- <v-toolbar-side-icon @click.stop="toggleDrawer()"></v-toolbar-side-icon> -->
+      <v-toolbar-side-icon @click.stop="toggleDrawer()"></v-toolbar-side-icon>
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn icon href="https://github.com/moeddami/nuxt-material-admin">
       <v-icon>fa-2x fa-github</v-icon>
     </v-btn>
     <v-btn icon @click="handleFullScreen()">
-      <!-- <v-icon>fullscreen</v-icon> -->
+      <v-icon>fullscreen</v-icon>
     </v-btn>
     <!-- <v-menu offset-y origin="center center" class="elelvation-1" :nudge-right="140" :nudge-bottom="14" transition="scale-transition">
       <v-btn icon flat slot="activator">
@@ -76,7 +76,7 @@ export default {
     },
     methods: {
       toggleDrawer() {
-        // this.$store.commit('toggleDrawer')
+        this.$store.commit('toggleDrawer')
       },
       handleFullScreen() {
         // Util.toggleFullScreen();

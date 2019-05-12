@@ -1,24 +1,14 @@
-import DashboardAPI from "@/api/dashboard";
+import mutations from "@/store/mutations";
+import actions from "@/store/actions";
 
-export const state = () => ({
+const state = () => ({
     dashboardTools: {},
-    isLoading: false
+    isLoading: false,
+    drawer: true
 })
 
-export const mutations = {
-    API_DATA_LOADED(state, data) {
-        state.dashboardTools = data;
-        state.isLoading = !state.isLoading;
-    },
-    API_BEGIN_LOADING(state){
-        state.isLoading = !state.isLoading;
-    }
-}
-
-export const actions = {
-    async loadDashboardTools(context) {
-        context.commit('API_BEGIN_LOADING');
-        const tools = await DashboardAPI.getDashboard()
-        context.commit('API_DATA_LOADED', tools);
-    }
+export default {
+    state,
+    actions,
+    mutations
 }
