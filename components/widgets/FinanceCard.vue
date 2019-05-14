@@ -6,7 +6,7 @@
           <div class="title">{{title}}</div>
         </v-card-text>
         <v-card-text>
-          <span v-bind:class="indicatorClass">{{indicator}} {{currency}}</span>
+          <span v-bind:class="indicatorClass" v-html="monetary"></span>
         </v-card-text>
       </div>
     </div>
@@ -25,9 +25,14 @@ export default {
     indicatorState: String
   },
   mounted: function() {},
-  computed: {
-    indicator: function() {
+  methods: {
+    moneyFormat: function() {
       return _format(this.value, "0,0");
+    }
+  },
+  computed: {
+    monetary() {
+      return this.moneyFormat() + " " + this.currency;
     },
     indicatorClass: function() {
       let cssClassObj = {

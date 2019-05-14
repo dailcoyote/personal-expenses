@@ -3,7 +3,7 @@
     <v-container grid-list-lg fluid>
       <v-layout v-if="!isLoading && dashboardTools" row wrap ma-2>
         <v-flex v-for="(item) in dashboardTools.cards" v-bind:key="item.id" lg3 sm6 md3>
-          <finance-card v-bind="item"></finance-card>
+          <finance-card v-bind="item" :currency="currency"></finance-card>
         </v-flex>
         <v-flex lg4 sm12 xs12>
           <circle-statistic
@@ -14,7 +14,7 @@
             :color="dashboardTools.stat.expenditures.month.color"
             :value="dashboardTools.stat.expenditures.month.percentBalance"
             :income="dashboardTools.stat.expenditures.month.income"
-            :currency="dashboardTools.options.currency"
+            :currency="currency"
           >
           </circle-statistic>
         </v-flex>
@@ -28,6 +28,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import settings from "@/settings";
 import Material from "vuetify/es5/util/colors";
 import FinanceCard from "@/components/widgets/FinanceCard";
 import CircleStatistic from "@/components/widgets/CircleStatistic";
@@ -40,6 +41,7 @@ export default {
   },
   data: () => ({
     color: Material,
+    currency: settings.currency.code,
     selectedTab: "tab-1"
   }),
   created: function() {

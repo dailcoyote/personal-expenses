@@ -13,28 +13,24 @@ const Dashboard = {
             id: "",
             title: "Budget",
             value: Budget.currentMonth.inStock,
-            currency: "KZT",
             indicatorState: "A"
         },
         {
             id: "",
             title: "Debt",
             value: 0,
-            currency: "KZT",
             indicatorState: "A"
         },
         {
             id: "",
             title: "Total Costs",
             value: -756884,
-            currency: "KZT",
             indicatorState: "A"
         },
         {
             id: "",
             title: "Bank",
             value: 2804,
-            currency: "KZT",
             indicatorState: "A"
         }
     ],

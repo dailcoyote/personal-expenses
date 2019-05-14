@@ -10,7 +10,7 @@
     </v-card-title>
     <v-card-text>
       <div class="justify-center row layout">
-          <span class="title">Income: {{income}} {{currency}}</span>
+          <span class="title" v-html="monetary"></span>
       </div>
     </v-card-text>
     <v-card-text>
@@ -43,6 +43,11 @@ export default {
     income: String,
     currency: String,
     color: String
+  },
+  computed: {
+    monetary() {
+      return "Income: " + this.income + " " + this.currency;
+    },
   }
 };
 </script>

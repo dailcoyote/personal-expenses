@@ -1,29 +1,69 @@
 export default [
     {
-      title: 'New user registered',
-      color: 'light-green',
-      icon: 'account_circle',
-      timeLabel: 'Just now'
+        date: new Date(2019, 4, 1),
+        listOf: [
+            {
+                title: 'Donations',
+                activityGroup: 'R',
+                type: 'Debit',
+                value: 40000
+            }    
+        ]
     },
-    { divider: true, inset: true },
     {
-      title: 'New order received',
-      color: 'light-blue',
-      icon: 'shopping_cart',
-      timeLabel: '2 min ago'
+        date: new Date(2019, 3, 15),
+        listOf:[
+            {
+                title: 'Funds withdrawal',
+                activityGroup: 'R',
+                type: 'Debit',
+                value: 39200
+            },
+            {
+                title: 'Market',
+                activityGroup: 'E',
+                type: 'Credit',
+                value: -12100
+            },
+            {
+                title: 'Basket',
+                activityGroup: 'E',
+                type: 'Credit',
+                value: -4150
+            },
+            {
+                title: 'Stationery',
+                activityGroup: 'E',
+                type: 'Credit',
+                value: -300
+            }            
+        ]
+    },{
+        date: new Date(2019, 4, 15),
+        listOf: [
+            {
+                title: 'Issuance of debt',
+                activityGroup: 'E',
+                type: 'Credit',
+                value: -1000
+            }    
+        ]
     },
-    { divider: true, inset: true },
     {
-      title: 'New payment made',
-      color: 'cyan',
-      icon: 'payment',
-      timeLabel: '24 min ago'
-    },
-    { divider: true, inset: true },
-    {
-      title: 'New message from Michael',
-      color: 'red',
-      icon: 'email',
-      timeLabel: '1 hour ago'
+        date: new Date(2019, 5, 6),
+        listOf: [
+            {
+                title: 'Smoke',
+                activityGroup: 'E',
+                type: 'Credit',
+                value: -6900
+            },
+            {
+                title: 'Utilities',
+                activityGroup: 'E',
+                type: 'Credit',
+                value: -6125.22
+            }    
+        ]
     }
-  ];
+]
