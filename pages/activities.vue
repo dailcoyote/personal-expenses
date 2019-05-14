@@ -1,11 +1,23 @@
 <template>
   <div id="pageActivityList">
     <v-container grid-list-lg fluid>
-      <v-layout row wrap ma-0 align-center justify-center mb-3
-                v-for="(activity, rootIndx) in activities" :key="rootIndx">
+      <search-filter></search-filter>
+      <v-layout
+        row
+        wrap
+        ma-0
+        align-center
+        justify-center
+        mb-3
+        v-for="(activity, rootIndx) in activities"
+        :key="rootIndx"
+      >
         <v-flex lg6 md-4 sm12 xs12>
-          <activity-card-list v-bind:title="activity.date" v-bind:items="activity.listOf" 
-                              :currency="currency"></activity-card-list>
+          <activity-card-list
+            v-bind:title="activity.date"
+            v-bind:items="activity.listOf"
+            :currency="currency"
+          ></activity-card-list>
         </v-flex>
       </v-layout>
     </v-container>
@@ -20,11 +32,13 @@
 import Moment from "moment";
 import settings from "@/settings";
 import activities from "@/api/activities";
+import SearchFilter from "@/components/list/SearchFilter";
 import ActivityCardList from "@/components/widgets/ActivityCardList";
 
 export default {
   layout: "dashboard",
   components: {
+    SearchFilter,
     ActivityCardList
   },
   data: () => ({
