@@ -11,9 +11,8 @@ const Menu = [
         title: 'Activities',
         group: 'apps',
         name: 'Activities',
-        target: '_blank',
         icon: 'list',
-        href: '/activity/all'
+        href: '/activities'
       }
 ]
 
