@@ -1,4 +1,6 @@
-export default [
+import { timeout } from "@/util/processHelper";
+
+const activities = [
     {
         date: new Date(2019, 4, 1),
         listOf: [
@@ -67,3 +69,12 @@ export default [
         ]
     }
 ]
+
+const Service = {
+    async getActivities() {
+        await timeout();
+        return activities;
+    }
+}
+
+export default Service;

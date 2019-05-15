@@ -4,7 +4,9 @@ import actions from "@/store/actions";
 const state = () => ({
     dashboardTools: {},
     isLoading: false,
-    drawer: true
+    drawer: true,
+    activitiesLoading: false,
+    activities: []
 })
 
 export default {

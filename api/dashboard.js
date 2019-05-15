@@ -1,4 +1,5 @@
 import { _format } from "@/util/formatter"
+import { timeout, generateID } from "@/util/processHelper";
 
 const Budget = {
     currentMonth: {
@@ -53,12 +54,6 @@ const Dashboard = {
 }
 
 const Service = {
-    timeout() {
-        return new Promise(resolve => setTimeout(resolve, 900));
-    },
-    generateID() {
-        return Math.random().toString(36).substr(2, 6);
-    },
     calcCostsInPercent() {
         let costs = Budget.currentMonth.inCome - Budget.currentMonth.inStock;
         let percent = (costs * 100) / Budget.currentMonth.inCome;
@@ -66,7 +61,7 @@ const Service = {
     },
     setUpCards(){
         Dashboard.cards.forEach((item, index) => {
-            if (!item.id) item.id = this.generateID();
+            if (!item.id) item.id = generateID();
             if (item.title != "Total Costs") {
                 if (item.value > 0) Dashboard.cards[index]["indicatorState"] = "G";
                 else if (item.value < 0) Dashboard.cards[index]["indicatorState"] = "R";
@@ -79,7 +74,7 @@ const Service = {
         Dashboard.stat.expenditures.month.subTitle = costsInPercent + " %";
     },
     async getDashboard() {
-        await this.timeout(); // Response Imitation
+        await timeout(); // Response Imitation
         this.setUpCards();
         this.setUpStat();
         return Dashboard;
