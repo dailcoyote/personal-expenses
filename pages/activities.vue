@@ -1,6 +1,6 @@
 <template>
   <div id="pageActivityList">
-    <v-btn color="#40668e" small dark fixed top right fab :style="moveForFabButtonStyle">
+    <v-btn color="#40668e" small dark fixed top right fab :style="moveForFabButtonStyle" @click="onActivityCreate()">
       <v-icon>add</v-icon>
     </v-btn>
     <v404 v-if="!activities.length"></v404>
@@ -21,6 +21,7 @@
         <v-progress-circular :size="60" color="primary" indeterminate ma-auto></v-progress-circular>
       </v-layout>
     </v-container>
+    <activity-type-form></activity-type-form>
   </div>
 </template>
 
@@ -31,13 +32,15 @@ import settings from "@/settings";
 import V404 from "@/components/notifications/v404";
 import SearchFilter from "@/components/list/SearchFilter";
 import ActivityCardList from "@/components/widgets/ActivityCardList";
+import ActivityTypeForm from "@/components/popups/ActivityTypeForm";
 
 export default {
   layout: "dashboard",
   components: {
     V404,
     SearchFilter,
-    ActivityCardList
+    ActivityCardList,
+    ActivityTypeForm
   },
   data: () => ({
     currency: settings.currency.code
@@ -45,7 +48,11 @@ export default {
   created: function() {
     this.$store.dispatch("loadActivities");
   },
-  methods: {},
+  methods: {
+    onActivityCreate() {
+      this.$store.commit("activityPopupToggle")
+    }
+  },
   computed: {
     moveForFabButtonStyle() {
       return "top: 98px; right: 15px;";

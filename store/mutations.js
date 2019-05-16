@@ -5,6 +5,9 @@ const mutations = {
     drawer(state, val){
         state.drawer = val;
     },  
+    activityPopupToggle(state) {
+        state.activityPopupForm.isOpen = !state.activityPopupForm.isOpen;
+    },
     DASHBOARD_API_BEGIN_LOADING(state){
         state.isLoading = !state.isLoading;
     },

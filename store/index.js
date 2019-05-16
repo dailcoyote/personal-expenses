@@ -6,7 +6,10 @@ const state = () => ({
     isLoading: false,
     drawer: true,
     activitiesLoading: false,
-    activities: []
+    activities: [],
+    activityPopupForm: {
+        isOpen: false
+    }
 })
 
 export default {
