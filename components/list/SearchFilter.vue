@@ -1,7 +1,7 @@
 <template>
-  <v-container mb-3>
+  <v-container mb-2>
     <v-layout row wrap justify-center>
-      <v-flex lg6 md-4 sm12 xs12>
+      <v-flex lg9 md6 sm12 xs12>
         <v-card class="elevation-0">
           <v-card-text class="pa-0">
             <v-list two-line class="pa-0">
