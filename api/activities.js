@@ -52,7 +52,7 @@ const activities = [
         ]
     },
     {
-        date: new Date(2019, 5, 6),
+        date: new Date(2019, 4, 5),
         listOf: [
             {
                 title: 'Smoke',

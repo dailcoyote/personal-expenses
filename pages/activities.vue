@@ -4,7 +4,7 @@
       <v-icon>add</v-icon>
     </v-btn>
     <v404 v-if="!activities.length"></v404>
-    <v-container v-else grid-list-lg fluid ma-2>
+    <v-container v-else grid-list-lg fluid my-2>
       <search-filter></search-filter>
       <v-layout column wrap ma-0 v-if="!activitiesLoading && activities">
         <template v-for="(activity, rootIndx) in activities">
