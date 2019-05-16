@@ -18,15 +18,17 @@
         <v-layout wrap>
           <v-flex xs12 sm12 md12 mb-3>
             <activity-type-form-list
-               title="Replenishment" 
-               :listOf="activitiesOfReplenishment"
-               :clickListItemHandler="onActivityTypeSelected.bind(this)"></activity-type-form-list>
+              title="Replenishment"
+              :listOf="activitiesOfReplenishment"
+              :clickListItemHandler="onActivityTypeSelected.bind(this)"
+            ></activity-type-form-list>
           </v-flex>
-           <v-flex xs12 sm12 md12>
+          <v-flex xs12 sm12 md12>
             <activity-type-form-list
-               title="Expenses" 
-               :listOf="activitiesOfExpenses"
-               :clickListItemHandler="onActivityTypeSelected.bind(this)"></activity-type-form-list>
+              title="Expenses"
+              :listOf="activitiesOfExpenses"
+              :clickListItemHandler="onActivityTypeSelected.bind(this)"
+            ></activity-type-form-list>
           </v-flex>
         </v-layout>
       </v-card-text>
@@ -45,13 +47,15 @@ export default {
   },
   data: () => ({}),
   methods: {
-    onPopupClose() {
+    popupClose() {
       this.$store.commit("activityPopupToggle");
     },
+    onPopupClose() {
+      this.popupClose();
+    },
     onActivityTypeSelected(selectedItem) {
-        console.log(this)
-        console.log(selectedItem)
-    //   this.$$store.commit("")  
+      this.popupClose();
+      this.$router.push({path: "/activities/_new", query: {...selectedItem} })
     }
   },
   computed: {
