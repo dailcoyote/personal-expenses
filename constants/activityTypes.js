@@ -15,6 +15,12 @@ const ACTIVITY_TYPES = {
         icon: 'assignment_returned',
         text: "Debt coming"
     },
+    "Deposit Payment":{
+        group: ACTIVITY_GROUPS.R,
+        color: 'green darken-2',
+        icon: 'card_travel',
+        text: "Deposit Payment"
+    },
     "Donations": {
         group: ACTIVITY_GROUPS.R,
         color: 'orange accent-1',
@@ -30,7 +36,7 @@ const ACTIVITY_TYPES = {
     "Basket": {
         group: ACTIVITY_GROUPS.E,
         color: 'blue-grey darken-2',
-        icon: 'shopping_cart',
+        icon: 'shopping_basket',
         text: "Basket"
     },
     "Stationery": {
@@ -50,13 +56,7 @@ const ACTIVITY_TYPES = {
         color: 'deep orange lighten-2',
         icon: 'assignment_late',
         text: "Issuance of debt"
-    },
-    "Deposit Payment":{
-        group: ACTIVITY_GROUPS.E,
-        color: 'green darken-2',
-        icon: 'card_travel',
-        text: "Deposit Payment"
-    },
+    },    
     "Utilities":{
         group: ACTIVITY_GROUPS.E,
         color: 'blue grey darken-3',

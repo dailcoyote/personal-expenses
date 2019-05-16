@@ -1,7 +1,7 @@
 <template>
   <v-container mb-2>
     <v-layout row wrap justify-center>
-      <v-flex lg9 md6 sm12 xs12>
+      <v-flex lg7 md9 sm12 xs12>
         <v-card class="elevation-0">
           <v-card-text class="pa-0">
             <v-list two-line class="pa-0">
@@ -42,7 +42,7 @@
           <v-card-text class="pa-0">
             <v-container grid-list-md>
               <v-layout wrap justify-center>
-                <v-flex xs12 sm12 md6 my-3>
+                <v-flex xs12 sm12 md9 lg7 my-3>
                   <v-list two-line class="pa-0">
                     <template v-for="(item, index) in filterByGroup">
                       <v-list-tile :key="index" @click="onFilterSelected(index)">
