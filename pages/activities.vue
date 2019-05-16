@@ -1,6 +1,6 @@
 <template>
   <div id="pageActivityList">
-    <v-btn color="#40668e" dark fixed top right fab :style="moveForFabButtonStyle">
+    <v-btn color="#40668e" small dark fixed top right fab :style="moveForFabButtonStyle">
       <v-icon>add</v-icon>
     </v-btn>
     <v404 v-if="!activities.length"></v404>
