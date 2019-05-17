@@ -33,9 +33,11 @@ const mutations = {
     ACTIVITY_API_BEGIN_LOADING(state){
         state.activitiesLoading = !state.activitiesLoading;
     },
-    ACTIVITY_API_DATA_LOADED(state, offset){
+    LOAD_ACTIVITYIES(state, offset){
         state.activities = [...state.activities, ...state.activityStore.slice(offset, offset + Settings.search.limit)];
         console.log(state.activityStore.slice(offset, Settings.search.limit))
+    },
+    ACTIVITY_API_DATA_LOADED(state){
         state.activitiesLoading = !state.activitiesLoading;
     },
     DESTROY_ACTIVITIES(state){
