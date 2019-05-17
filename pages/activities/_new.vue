@@ -95,7 +95,7 @@ export default {
           newActivity["value"] = newActivity.activityGroup === ACTIVITY_GROUPS.E 
                                  ? cost - (cost * 2) : cost;
           this.$store
-              .dispatch("saveActivity", newActivity)
+              .dispatch("SAVE_ACTIVITY", newActivity)
               .then(response => this.$router.push({path: "/activities"}))          
         }
       });

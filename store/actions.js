@@ -9,11 +9,15 @@ const actions = {
     },
     async loadActivities(context) {
         context.commit('ACTIVITY_API_BEGIN_LOADING');
-        const activities = await ActivityAPI.getActivities();
+        const activities = !context.state.activities.length 
+                           ? await ActivityAPI.getActivities()
+                           : context.state.activities;
         context.commit('ACTIVITY_API_DATA_LOADED', [...activities]);
     },
-    async saveActivity({commit, state}, activity) {
-        await ActivityAPI.save({...activity});
+    async SAVE_ACTIVITY({commit, state}, activity) {
+        // await ActivityAPI.save({...activity});
+        commit('CREATE_ACTIVITY_ITEM', activity);
+        commit('SAVE_ACTIVITY_ITEM');
     }
 }
 
