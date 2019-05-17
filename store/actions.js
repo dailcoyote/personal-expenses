@@ -10,7 +10,10 @@ const actions = {
     async loadActivities(context) {
         context.commit('ACTIVITY_API_BEGIN_LOADING');
         const activities = await ActivityAPI.getActivities();
-        context.commit('ACTIVITY_API_DATA_LOADED', activities);
+        context.commit('ACTIVITY_API_DATA_LOADED', [...activities]);
+    },
+    async saveActivity({commit, state}, activity) {
+        await ActivityAPI.save({...activity});
     }
 }
 

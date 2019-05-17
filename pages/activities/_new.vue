@@ -6,7 +6,7 @@
           <v-card class="mb-4">
             <v-toolbar :color="formColorTheme" dark flat dense cad>
               <v-icon>{{params.icon}}</v-icon>
-              <v-toolbar-title class="subheading">{{formTitle}}</v-toolbar-title>
+              <v-toolbar-title class="subheading">{{form.title + " Form"}}</v-toolbar-title>
               <v-spacer></v-spacer>
             </v-toolbar>
             <v-divider></v-divider>
@@ -63,8 +63,8 @@ export default {
       },
       custom: {
         value: {
-          required: () => "Value can not be empty",
-        //   isNumber: value => "Only digits!"
+          required: () => "Value can not be empty"
+          //   isNumber: value => "Only digits!"
           // custom messages
         }
       }
@@ -74,23 +74,34 @@ export default {
     },
     valid: true,
     form: {
+      title: "",
+      activityGroup: "",
       value: "",
       description: ""
     }
   }),
   mounted() {
+    this.form.title = `${this.$route.query.text}`;
+    this.form.activityGroup = this.$route.query.group;
     this.$validator.localize("en", this.dictionary);
   },
   methods: {
     submit() {
-      console.log("Submit");
-      this.$validator.validateAll();
+      const validatorPromise = this.$validator.validateAll();
+      validatorPromise.then(success => {
+        if (success) {
+          const cost = parseInt(this.form["value"]);
+          const newActivity = { ...this.form };
+          newActivity["value"] = newActivity.activityGroup === ACTIVITY_GROUPS.E 
+                                 ? cost - (cost * 2) : cost;
+          this.$store
+              .dispatch("saveActivity", newActivity)
+              .then(response => this.$router.push({path: "/activities"}))          
+        }
+      });
     }
   },
   computed: {
-    formTitle() {
-      return `${this.$route.query.text} Form`;
-    },
     formCostLabel() {
       return this.$route.query.group === ACTIVITY_GROUPS.R ? "Debit" : "Credit";
     },

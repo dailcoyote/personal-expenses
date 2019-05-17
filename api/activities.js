@@ -1,79 +1,102 @@
+import _ from 'lodash';
 import { timeout } from "@/util/processHelper";
 
-const activities = [
-    {
-        date: new Date(2019, 4, 1),
-        listOf: [
-            {
-                title: 'Donations',
-                activityGroup: 'R',
-                type: 'Debit',
-                value: 40000
-            }    
-        ]
-    },
-    {
-        date: new Date(2019, 3, 15),
-        listOf:[
-            {
-                title: 'Funds withdrawal',
-                activityGroup: 'R',
-                type: 'Debit',
-                value: 39200
-            },
-            {
-                title: 'Market',
-                activityGroup: 'E',
-                type: 'Credit',
-                value: -12100
-            },
-            {
-                title: 'Basket',
-                activityGroup: 'E',
-                type: 'Credit',
-                value: -4150
-            },
-            {
-                title: 'Stationery',
-                activityGroup: 'E',
-                type: 'Credit',
-                value: -300
-            }            
-        ]
-    },{
-        date: new Date(2019, 4, 15),
-        listOf: [
-            {
-                title: 'Issuance of debt',
-                activityGroup: 'E',
-                type: 'Credit',
-                value: -1000
-            }    
-        ]
-    },
-    {
-        date: new Date(2019, 4, 5),
-        listOf: [
-            {
-                title: 'Smoke',
-                activityGroup: 'E',
-                type: 'Credit',
-                value: -6900
-            },
-            {
-                title: 'Utilities',
-                activityGroup: 'E',
-                type: 'Credit',
-                value: -6125.22
-            }    
-        ]
-    }
-]
 
 const Service = {
+    db: {
+        activityList: [
+            {
+                date: new Date(2019, 4, 1),
+                listOf: [
+                    {
+                        title: 'Donations',
+                        activityGroup: 'R',
+                        value: 40000
+                    }    
+                ]
+            },
+            {
+                date: new Date(2019, 3, 15),
+                listOf:[
+                    {
+                        title: 'Funds withdrawal',
+                        activityGroup: 'R',
+                        value: 39200
+                    },
+                    {
+                        title: 'Market',
+                        activityGroup: 'E',
+                        value: -12100
+                    },
+                    {
+                        title: 'Basket',
+                        activityGroup: 'E',
+                        value: -4150
+                    },
+                    {
+                        title: 'Stationery',
+                        activityGroup: 'E',
+                        value: -300
+                    }            
+                ]
+            },{
+                date: new Date(2019, 4, 15),
+                listOf: [
+                    {
+                        title: 'Issuance of debt',
+                        activityGroup: 'E',
+                        value: -1000
+                    }    
+                ]
+            },
+            {
+                date: new Date(2019, 4, 17),
+                listOf: [
+                    {
+                        title: 'Smoke',
+                        activityGroup: 'E',
+                        value: -6900
+                    },
+                    {
+                        title: 'Utilities',
+                        activityGroup: 'E',
+                        value: -6125.22
+                    }    
+                ]
+            }
+        ]
+        
+    },
     async getActivities() {
         await timeout();
-        return activities;
+        this.db.activityList.sort((prev, current) => {
+            if(prev.date.getTime() > current.date.getTime()) return -1
+            else if(prev.date.getTime() < current.date.getTime()) return 1;
+            else return 0;
+        })
+        const ret = this.db.activityList.slice()
+        return ret;
+    },
+    async save(activity) {
+        const _now = new Date();        
+        const indx = _.findIndex(this.db.activityList, (l) => {
+            return l.date.getMonth() == _now.getMonth()
+            && l.date.getDate() == _now.getDate() 
+            && l.date.getFullYear() == _now.getFullYear() 
+        });
+        if(indx >= 0){
+            this.db.activityList[indx]["listOf"].push(activity);
+        }
+        else{
+            const newItem = {
+                date: new Date(),
+                listOf: []
+            };
+            newItem.listOf.push(activity);
+            arr.push(newItem)
+        }
+        await timeout();
+       
     }
 }
 
