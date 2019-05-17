@@ -1,6 +1,16 @@
 <template>
   <div id="pageActivityList">
-    <v-btn color="#40668e" small dark fixed top right fab :style="moveForFabButtonStyle" @click="onActivityCreate()">
+    <v-btn
+      color="#40668e"
+      small
+      dark
+      fixed
+      top
+      right
+      fab
+      :style="moveForFabButtonStyle"
+      @click="onActivityCreate()"
+    >
       <v-icon>add</v-icon>
     </v-btn>
     <v404 v-if="!activities.length"></v404>
@@ -43,25 +53,53 @@ export default {
     ActivityTypeForm
   },
   data: () => ({
-    currency: settings.currency.code
+    currency: settings.currency.code,
+    bottom: false,
+    offset: 0
   }),
   created: function() {
-    this.$store.dispatch("loadActivities");
+    this.loadActivities();
+    window.addEventListener("scroll", () => {
+      this.bottom = this.bottomVisible();
+    });
+  },
+  mounted: function() {},
+  destroyed() {
+    this.destroyActivities();
   },
   methods: {
     onActivityCreate() {
-      this.$store.commit("activityPopupToggle")
+      this.$store.commit("activityPopupToggle");
+    },
+    bottomVisible() {
+      const scrollY = window.scrollY;
+      const visible = document.documentElement.clientHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+      const bottomPage = visible + scrollY >= pageHeight;
+      return bottomPage || pageHeight < visible;
+    },
+    destroyActivities() {
+      this.$store.commit("DESTROY_ACTIVITIES");
+    },
+    loadActivities() {      
+      this.$store.dispatch("loadActivities", this.offset);
+      this.offset = this.offset + settings.search.limit;
     }
   },
   computed: {
-    activities(){
-      return this.getActivities();
-    },
+    // activities() {
+    //   return this.getActivities(this.offset)
+    // },
     moveForFabButtonStyle() {
       return "top: 98px; right: 15px;";
     },
-    ...mapState(["activitiesLoading"]),
-    ...mapGetters(["getActivities"])
+    ...mapState(["activitiesLoading", "activities"]),
+    // ...mapGetters(["getActivities"])
+  },
+  watch: {
+    bottom(bottom) {
+      if (bottom) this.loadActivities();
+    }
   }
 };
 </script>

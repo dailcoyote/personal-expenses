@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { now } from 'moment';
+import Settings from "@/settings";
 
 const mutations = {
     toggleDrawer(state){
@@ -18,12 +19,27 @@ const mutations = {
         state.dashboardTools = data;
         state.isLoading = !state.isLoading;
     },
+    CREATE_ACTIVITY_STORE(state, data) {
+        state.activityStore = data;
+    },
+    ACTIVITY_STORE_SORT(state, data){
+        state.activityStore.sort((prev, current) => {
+            if(prev.date.getTime() > current.date.getTime()) return -1
+            else if(prev.date.getTime() < current.date.getTime()) return 1;
+            else return 0;
+        })
+        state.activityStore = [...state.activityStore];
+    },
     ACTIVITY_API_BEGIN_LOADING(state){
         state.activitiesLoading = !state.activitiesLoading;
     },
-    ACTIVITY_API_DATA_LOADED(state, activities){
-        state.activities = activities;
+    ACTIVITY_API_DATA_LOADED(state, offset){
+        state.activities = [...state.activities, ...state.activityStore.slice(offset, offset + Settings.search.limit)];
+        console.log(state.activityStore.slice(offset, Settings.search.limit))
         state.activitiesLoading = !state.activitiesLoading;
+    },
+    DESTROY_ACTIVITIES(state){
+        state.activities = [];
     },
     CREATE_ACTIVITY_ITEM(state, activity){
         state.newActivityItem = activity;
@@ -31,14 +47,14 @@ const mutations = {
     SAVE_ACTIVITY_ITEM(state){
         const _now = new Date(); 
         const newActivity = state.newActivityItem;  
-        const activitiesFromPrevState = [...state.activities];
-        const indx = _.findIndex(activitiesFromPrevState, (l) => {
+        const activitiesMutated = [...state.activityStore];
+        const indx = _.findIndex(activitiesMutated, (l) => {
             return l.date.getMonth() == _now.getMonth()
             && l.date.getDate() == _now.getDate() 
             && l.date.getFullYear() == _now.getFullYear() 
         });
         if(indx >= 0){
-            activitiesFromPrevState[indx]["listOf"].push(newActivity);
+            activitiesMutated[indx]["listOf"].push(newActivity);
         }
         else{
             const newItem = {
@@ -46,9 +62,9 @@ const mutations = {
                 listOf: []
             };
             newItem.listOf.push(newActivity);
-            activitiesFromPrevState.push(newItem)
+            activitiesMutated.push(newItem)
         }
-        state.activities = activitiesFromPrevState;
+        state.activityStore = [...activitiesMutated];
     }
 }
 

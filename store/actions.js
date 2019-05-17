@@ -1,20 +1,20 @@
 import DashboardAPI from "@/api/dashboard";
 import ActivityAPI from "@/api/activities";
+import Settings from "@/settings";
 
 const actions = {
-    async loadDashboardTools({commit, state}) {
+    async loadDashboardTools({ commit, state }) {
         commit('DASHBOARD_API_BEGIN_LOADING');
         const tools = await DashboardAPI.getDashboard()
         commit('DASHBOARD_API_DATA_LOADED', tools);
     },
-    async loadActivities({commit, state}) {
+    async loadActivities({ commit, state }, offset=0) {
         commit('ACTIVITY_API_BEGIN_LOADING');
-        const activities = !state.activities.length 
-                           ? await ActivityAPI.getActivities()
-                           : state.activities;
-        commit('ACTIVITY_API_DATA_LOADED', [...activities]);
+        state.activityStore.length || commit('CREATE_ACTIVITY_STORE', await ActivityAPI.getActivities());
+        commit('ACTIVITY_STORE_SORT');
+        commit('ACTIVITY_API_DATA_LOADED', offset);
     },
-    async SAVE_ACTIVITY({commit, state}, newActivity) {
+    async SAVE_ACTIVITY({ commit, state }, newActivity) {
         commit('CREATE_ACTIVITY_ITEM', newActivity);
         commit('SAVE_ACTIVITY_ITEM');
     }

@@ -63,18 +63,33 @@ const Service = {
                         value: -6125.22
                     }    
                 ]
+            },
+            {
+                date: new Date(2019, 1, 15),
+                listOf: [
+                    {
+                        title: 'Basket',
+                        activityGroup: 'E',
+                        value: -6900
+                    },
+                    {
+                        title: 'Basket',
+                        activityGroup: 'E',
+                        value: -1202
+                    }    
+                ]
             }
         ]
      },
-    orderList() {
-        this.db.activityList.sort((prev, current) => {
+    orderList(activityList) {
+        activityList.sort((prev, current) => {
             if(prev.date.getTime() > current.date.getTime()) return -1
             else if(prev.date.getTime() < current.date.getTime()) return 1;
             else return 0;
         })
     },
     async getActivities() {
-        this.orderList();
+        this.orderList(this.db.activityList);
         await timeout();
         return this.db.activityList.slice();
     },

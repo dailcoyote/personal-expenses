@@ -7,6 +7,7 @@ const state = () => ({
     isLoading: false,
     drawer: true,
     activitiesLoading: false,
+    activityStore: [],
     activities: [],
     newActivityItem: {},
     activityPopupForm: {
