@@ -9,7 +9,7 @@ const mutations = {
     drawer(state, val){
         state.drawer = val;
     },  
-    activityPopupToggle(state) {
+    ACTIVITY_POPUP_TOGGLE(state) {
         state.activityPopupForm.isOpen = !state.activityPopupForm.isOpen;
     },
     DASHBOARD_API_BEGIN_LOADING(state){
@@ -35,7 +35,6 @@ const mutations = {
     },
     LOAD_ACTIVITYIES(state, offset){
         state.activities = [...state.activities, ...state.activityStore.slice(offset, offset + Settings.search.limit)];
-        console.log(state.activityStore.slice(offset, Settings.search.limit))
     },
     ACTIVITY_API_DATA_LOADED(state){
         state.activitiesLoading = !state.activitiesLoading;

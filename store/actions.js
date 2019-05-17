@@ -8,10 +8,10 @@ const actions = {
         const tools = await DashboardAPI.getDashboard()
         commit('DASHBOARD_API_DATA_LOADED', tools);
     },
-    async loadActivities({ commit, state }, offset = 0) {
+    async LOAD_ACTIVITIES({ commit, state }, offset = 0) {
         commit('ACTIVITY_API_BEGIN_LOADING');
         state.activityStore.length || commit('CREATE_ACTIVITY_STORE', await ActivityAPI.getActivities());
-        if ((state.activityStore.length - (offset + Settings.search.limit)) + Settings.search.limit > 0) {
+        if (state.activityStore.length >= offset) {
             commit('ACTIVITY_STORE_SORT');
             commit('LOAD_ACTIVITYIES', offset);
         }

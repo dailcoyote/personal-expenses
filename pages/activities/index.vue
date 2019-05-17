@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     onActivityCreate() {
-      this.$store.commit("activityPopupToggle");
+      this.$store.commit("ACTIVITY_POPUP_TOGGLE");
     },
     bottomVisible() {
       const scrollY = window.scrollY;
@@ -82,14 +82,11 @@ export default {
       this.$store.commit("DESTROY_ACTIVITIES");
     },
     loadActivities() {      
-      this.$store.dispatch("loadActivities", this.offset);
+      this.$store.dispatch("LOAD_ACTIVITIES", this.offset);
       this.offset = this.offset + settings.search.limit;
     }
   },
   computed: {
-    // activities() {
-    //   return this.getActivities(this.offset)
-    // },
     moveForFabButtonStyle() {
       return "top: 98px; right: 15px;";
     },

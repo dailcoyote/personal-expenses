@@ -48,7 +48,7 @@ export default {
   data: () => ({}),
   methods: {
     popupClose() {
-      this.$store.commit("activityPopupToggle");
+      this.$store.commit("ACTIVITY_POPUP_TOGGLE");
     },
     onPopupClose() {
       this.popupClose();
