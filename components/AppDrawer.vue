@@ -73,8 +73,7 @@ export default {
         return this.$store.state.drawer;
       },
       set(val) {
-        console.log(val)
-        this.$store.commit("drawer", val);
+        this.$store.commit("DRAWER", val);
       }
     },
     computeGroupActive() {

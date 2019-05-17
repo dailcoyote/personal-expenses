@@ -76,7 +76,7 @@ export default {
     },
     methods: {
       toggleDrawer() {
-        this.$store.commit('toggleDrawer')
+        this.$store.commit('TOGGLE_DRAWER')
       },
       handleFullScreen() {
         // Util.toggleFullScreen();

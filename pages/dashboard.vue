@@ -45,11 +45,9 @@ export default {
     selectedTab: "tab-1"
   }),
   created: function() {
-    this.$store.dispatch("loadDashboardTools");
+    this.$store.dispatch("LOAD_DASHBOARD_TOOLS");
   },
-  mounted: function() {
-    // this.$store.dispatch("loadDashboardTools");
-  },
+  mounted: function() {},
   computed: {
     ...mapState(["dashboardTools", "isLoading"])
   }

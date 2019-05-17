@@ -3,10 +3,10 @@ import { now } from 'moment';
 import Settings from "@/settings";
 
 const mutations = {
-    toggleDrawer(state){
+    TOGGLE_DRAWER(state){
         state.drawer = !state.drawer;
     },
-    drawer(state, val){
+    DRAWER(state, val){
         state.drawer = val;
     },  
     ACTIVITY_POPUP_TOGGLE(state) {

@@ -3,7 +3,7 @@ import ActivityAPI from "@/api/activities";
 import Settings from "@/settings";
 
 const actions = {
-    async loadDashboardTools({ commit, state }) {
+    async LOAD_DASHBOARD_TOOLS({ commit, state }) {
         commit('DASHBOARD_API_BEGIN_LOADING');
         const tools = await DashboardAPI.getDashboard()
         commit('DASHBOARD_API_DATA_LOADED', tools);
