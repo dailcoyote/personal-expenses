@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import Moment from "moment";
 import settings from "@/settings";
 import V404 from "@/components/notifications/v404";
@@ -54,10 +54,14 @@ export default {
     }
   },
   computed: {
+    activities(){
+      return this.getActivities();
+    },
     moveForFabButtonStyle() {
       return "top: 98px; right: 15px;";
     },
-    ...mapState(["activitiesLoading", "activities"])
+    ...mapState(["activitiesLoading"]),
+    ...mapGetters(["getActivities"])
   }
 };
 </script>

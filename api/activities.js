@@ -65,17 +65,18 @@ const Service = {
                 ]
             }
         ]
-        
-    },
-    async getActivities() {
-        await timeout();
+     },
+    orderList() {
         this.db.activityList.sort((prev, current) => {
             if(prev.date.getTime() > current.date.getTime()) return -1
             else if(prev.date.getTime() < current.date.getTime()) return 1;
             else return 0;
         })
-        const ret = this.db.activityList.slice()
-        return ret;
+    },
+    async getActivities() {
+        this.orderList();
+        await timeout();
+        return this.db.activityList.slice();
     },
     async save(activity) {
         const _now = new Date();        
