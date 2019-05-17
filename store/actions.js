@@ -1,11 +1,13 @@
-import DashboardAPI from "@/api/dashboard";
+import DashboardUtil from "@/util/dashboard";
 import ActivityAPI from "@/api/activities";
 import Settings from "@/settings";
 
 const actions = {
     async LOAD_DASHBOARD_TOOLS({ commit, state }) {
         commit('DASHBOARD_API_BEGIN_LOADING');
-        const tools = await DashboardAPI.getDashboard()
+        state.activityStore.length || commit('CREATE_ACTIVITY_STORE', await ActivityAPI.getActivities());
+        const tools = await DashboardUtil.getDashboard(state.activityStore)
+        console.log("tools",tools)
         commit('DASHBOARD_API_DATA_LOADED', tools);
     },
     async LOAD_ACTIVITIES({ commit, state }, offset = 0) {
