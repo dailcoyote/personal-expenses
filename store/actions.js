@@ -3,25 +3,26 @@ import ActivityAPI from "@/api/activities";
 import Settings from "@/settings";
 
 const actions = {
-    async LOAD_DASHBOARD_TOOLS({ commit, state }) {
+    async LOAD_DASHBOARD_TOOLS({ commit, state, dispatch }) {
         commit('DASHBOARD_API_BEGIN_LOADING');
-        state.activityStore.length || commit('CREATE_ACTIVITY_STORE', await ActivityAPI.getActivities());
-        const tools = await DashboardUtil.getDashboard(state.activityStore)
-        console.log("tools",tools)
-        commit('DASHBOARD_API_DATA_LOADED', tools);
+        if(!state.dashboardTools)
+            await dispatch('UPDATE_DASHBOARD')
+        commit('DASHBOARD_API_DATA_LOADED');
     },
-    async LOAD_ACTIVITIES({ commit, state }, offset = 0) {
+    async LOAD_ACTIVITIES({ commit }, offset = 0) {
         commit('ACTIVITY_API_BEGIN_LOADING');
-        state.activityStore.length || commit('CREATE_ACTIVITY_STORE', await ActivityAPI.getActivities());
-        if (state.activityStore.length >= offset) {
-            commit('ACTIVITY_STORE_SORT');
-            commit('LOAD_ACTIVITYIES', offset);
-        }
+        const activities = await ActivityAPI.loadActivities(offset);
         commit('ACTIVITY_API_DATA_LOADED');
+        return activities;
     },
-    async SAVE_ACTIVITY({ commit, state }, newActivity) {
-        commit('CREATE_ACTIVITY_ITEM', newActivity);
-        commit('SAVE_ACTIVITY_ITEM');
+    async NEW_TRANSACTION_CREATED({ commit, dispatch, state }, newActivityTransactionId) {
+        commit('ACTIVITY_TRANSACTION_ID_COMMIT', newActivityTransactionId);
+        dispatch('UPDATE_DASHBOARD')
+    },
+    async UPDATE_DASHBOARD({ commit, state }){
+        const activityStore = await ActivityAPI.getActivityStore();
+        const dashboard = await DashboardUtil.getDashboard(activityStore)
+        commit('DASHBOARD_COMMIT', dashboard)
     }
 }
 

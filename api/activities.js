@@ -1,10 +1,10 @@
 import _ from 'lodash';
-import { timeout } from "@/util/processHelper";
-
+import { timeout, generateID } from "@/util/processHelper";
+import Settings from "@/settings";
 
 const Service = {
     db: {
-        activityList: [
+        activityStore: [
             {
                 date: new Date(2019, 4, 1),
                 listOf: [
@@ -81,27 +81,38 @@ const Service = {
             }
         ]
      },
-    orderList(activityList) {
-        activityList.sort((prev, current) => {
+    orderList() {
+        this.db.activityStore.sort((prev, current) => {
             if(prev.date.getTime() > current.date.getTime()) return -1
             else if(prev.date.getTime() < current.date.getTime()) return 1;
             else return 0;
         })
     },
-    async getActivities() {
-        this.orderList(this.db.activityList);
-        await timeout();
-        return this.db.activityList.slice();
+    transactionId() {
+        return generateID();
+    },
+    async getActivityStore() {
+        this.orderList(this.db.activityStore);
+        return this.db.activityStore;
+    },
+    async loadActivities(offset) {
+        if(this.db.activityStore.length >= offset) {
+            this.orderList(this.db.activityStore);
+            return [...this.db.activityStore.slice(offset, offset + Settings.search.limit)];
+        }
+        return false;
     },
     async save(activity) {
-        const _now = new Date();        
-        const indx = _.findIndex(this.db.activityList, (l) => {
+        const _now = new Date();  
+        const transactionId = this.transactionId();     
+        const indx = _.findIndex(this.db.activityStore, (l) => {
             return l.date.getMonth() == _now.getMonth()
             && l.date.getDate() == _now.getDate() 
             && l.date.getFullYear() == _now.getFullYear() 
         });
+        activity["transactionId"] = transactionId;
         if(indx >= 0){
-            this.db.activityList[indx]["listOf"].push(activity);
+            this.db.activityStore[indx]["listOf"].push(activity);
         }
         else{
             const newItem = {
@@ -109,10 +120,10 @@ const Service = {
                 listOf: []
             };
             newItem.listOf.push(activity);
-            arr.push(newItem)
+            this.db.activityStore.push(newItem)
         }
-        await timeout();
-       
+        await timeout(); 
+        return transactionId;
     }
 }
 

@@ -52,6 +52,7 @@
 <script>
 import settings from "@/settings";
 import { ACTIVITY_GROUPS } from "@/constants/activityTypes";
+import ActivityAPI from "@/api/activities";
 
 export default {
   layout: "dashboard",
@@ -88,15 +89,15 @@ export default {
   methods: {
     submit() {
       const validatorPromise = this.$validator.validateAll();
-      validatorPromise.then(success => {
+      validatorPromise.then(async (success) => {
         if (success) {
           const cost = parseInt(this.form["value"]);
           const newActivity = { ...this.form };
           newActivity["value"] = newActivity.activityGroup === ACTIVITY_GROUPS.E 
-                                 ? cost - (cost * 2) : cost;
-          this.$store
-              .dispatch("SAVE_ACTIVITY", newActivity)
-              .then(response => this.$router.push({path: "/activities"}))          
+                                 ? cost - (cost * 2) : cost; 
+          const transactionId = await ActivityAPI.save(newActivity);                       
+          this.$store.dispatch("NEW_TRANSACTION_CREATED", transactionId)
+          this.$router.push({path: "/activities"})          
         }
       });
     }

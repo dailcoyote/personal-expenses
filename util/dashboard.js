@@ -72,7 +72,7 @@ const Dashboard = {
         this.processing(activities);
         this.setUpStat();
         this.setUpCards();
-        return this.dashboard;
+        return {...this.dashboard};
     }
 }
 

@@ -55,7 +55,8 @@ export default {
   data: () => ({
     currency: settings.currency.code,
     bottom: false,
-    offset: 0
+    offset: 0,
+    activities: []
   }),
   created: function() {
     this.loadActivities();
@@ -64,9 +65,7 @@ export default {
     });
   },
   mounted: function() {},
-  destroyed() {
-    this.destroyActivities();
-  },
+  destroyed() {},
   methods: {
     onActivityCreate() {
       this.$store.commit("ACTIVITY_POPUP_TOGGLE");
@@ -79,19 +78,24 @@ export default {
       return bottomPage || pageHeight < visible;
     },
     destroyActivities() {
-      this.$store.commit("DESTROY_ACTIVITIES");
+      // this.$store.commit("DESTROY_ACTIVITIES");
     },
     loadActivities() {      
-      this.$store.dispatch("LOAD_ACTIVITIES", this.offset);
+      this.$store
+          .dispatch("LOAD_ACTIVITIES", this.offset)
+          .then(chunk => {
+              this.activities = chunk && Array.isArray(chunk) ? 
+                                [...this.activities, ...chunk] : this.activities;
+          })
       this.offset = this.offset + settings.search.limit;
     }
   },
   computed: {
+    ...mapState(["activitiesLoading"]),
+    // ...mapGetters(["getActivities"])
     moveForFabButtonStyle() {
       return "top: 98px; right: 15px;";
     },
-    ...mapState(["activitiesLoading", "activities"]),
-    // ...mapGetters(["getActivities"])
   },
   watch: {
     bottom(bottom) {
