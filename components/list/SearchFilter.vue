@@ -47,10 +47,14 @@
                     <template v-for="(item, index) in filterByGroup">
                       <v-list-tile :key="index" @click="onFilterSelected(index)">
                         <v-list-tile-content>
-                          <v-list-tile-sub-title v-html="item" class="subtitle"></v-list-tile-sub-title>
+                          <v-list-tile-sub-title v-html="item.label" class="subtitle"></v-list-tile-sub-title>
                         </v-list-tile-content>
                         <v-list-tile-action>
-                          <v-checkbox v-model="search.filterItem" :value="item" color="#40668e"></v-checkbox>
+                          <v-checkbox
+                            v-model="search.filterItemLabel"
+                            :value="item.label"
+                            color="#40668e"
+                          ></v-checkbox>
                         </v-list-tile-action>
                       </v-list-tile>
                     </template>
@@ -59,7 +63,7 @@
               </v-layout>
               <v-layout row justify-center>
                 <v-flex xs12 sm12 md6 my-3 row>
-                  <v-btn block color="#40668e" dark @click="onSearch()">Apply</v-btn>
+                  <v-btn block v-if="search.filterChipEnabled" color="#40668e" dark @click="onSearch()">Apply</v-btn>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -89,19 +93,22 @@
 </template>
 
 <script>
+import Moment from "moment";
+import settings from "@/settings";
+
 export default {
+  props: {
+    searchActivities: Function,
+    reload: Function
+  },
   data: () => ({
-    filterByGroup: [
-      "Last Week",
-      "Last Month",
-      "Last 3 Months",
-      "Last 6 Months"
-    ],
+    filterByGroup: [...settings.search.filter.filterByGroup],
     search: {
       dialog: false,
       filterChipEnabled: false,
       filterChipLabel: "",
-      filterItem: ""
+      filterItemLabel: "",
+      filterItemStartDate: undefined
     }
   }),
   methods: {
@@ -109,21 +116,26 @@ export default {
       this.search.dialog = true;
     },
     onFilterSelected: function(indx) {
-      this.search.filterItem = this.filterByGroup[indx];
+      this.search.filterItemLabel = this.filterByGroup[indx].label;
+      this.search.filterItemStartDate = this.filterByGroup[indx].startDate;
+      this.search.filterChipEnabled = true;
+      this.search.filterChipLabel = this.search.filterItemLabel.substring();
     },
     resetFilter: function() {
-      this.search.filterItem = "";
+      this.search.filterItemLabel = "";
+      this.search.filterItemStartDate = undefined;
       this.search.filterChipEnabled = false;
     },
     onFilterItemRemoved: function() {
-      this.search.filterItem = "";
+      this.resetFilter();
+      this.reload();
     },
     onSearch: function() {
       this.search.dialog = !this.search.dialog;
-      if (this.search.filterItem) {
-        this.search.filterChipEnabled = true;
-        this.search.filterChipLabel = this.search.filterItem.substring();
-      }
+      this.searchActivities({
+        startDate: this.search.filterItemStartDate,
+        endDate: undefined
+      });
     }
   }
 };

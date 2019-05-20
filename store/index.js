@@ -10,6 +10,16 @@ const state = () => ({
     activityStore: [],
     activities: [],
     newActivityTransactionId: undefined,
+    search: {
+        activities: {
+            filter: {
+                offset: 0,
+                startDate: undefined,
+                endDate: undefined
+            },
+            loaded: false
+        }
+    },
     activityPopupForm: {
         isOpen: false
     },

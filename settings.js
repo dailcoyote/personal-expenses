@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export default {
     snackbar: {
         timeout: 6500
@@ -7,7 +9,15 @@ export default {
         name: "KZT"
     },
     search: {
-        limit: 4
+        limit: 4,
+        filter: {
+            filterByGroup: [
+                { label: "Last Week", startDate: moment().day(-7).toDate() },
+                { label: "Last Month", startDate: moment().day(-30).toDate() },
+                { label: "Last 3 Months", startDate: moment().day(-(30*3)).toDate() },
+                { label: "Last 6 Months", startDate: moment().day(-(30*6)).toDate() }                
+            ]
+        }
     },
     dashboard: {
         cards: [

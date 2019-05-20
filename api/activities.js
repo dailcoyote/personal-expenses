@@ -95,10 +95,23 @@ const Service = {
         this.orderList(this.db.activityStore);
         return this.db.activityStore;
     },
-    async loadActivities(offset) {
+    async loadActivities({ startDate, endDate, offset = 0 }) {
         if (this.db.activityStore.length >= offset) {
             this.orderList(this.db.activityStore);
-            return [...this.db.activityStore.slice(offset, offset + Settings.search.limit)];
+            if (startDate)
+                return this.search({ startDate, offset })
+            else
+                return [...this.db.activityStore.slice(offset, offset + Settings.search.limit)];
+        }
+        return false;
+    },
+    async search({ startDate, offset = 0 }) {
+        if (this.db.activityStore.length >= offset) {
+            this.orderList(this.db.activityStore);
+            const filtered = this.db.activityStore.filter((activity, indx) => {
+                return activity.date.getTime() >= startDate.getTime();
+            })
+            return filtered.slice(offset, offset + Settings.search.limit)
         }
         return false;
     },

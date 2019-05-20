@@ -15,7 +15,7 @@
     </v-btn>
     <v404 v-if="!activities.length"></v404>
     <v-container v-else grid-list-lg fluid my-2>
-      <search-filter></search-filter>
+      <search-filter :reload="reload" :searchActivities="searchActivities"></search-filter>
       <v-layout column wrap ma-0 v-if="!activitiesLoading && activities">
         <template v-for="(activity, rootIndx) in activities">
           <v-flex md1 d-flex mb-2 :key="rootIndx">
@@ -55,7 +55,6 @@ export default {
   data: () => ({
     currency: settings.currency.code,
     bottom: false,
-    offset: 0,
     activities: []
   }),
   created: function() {
@@ -65,7 +64,9 @@ export default {
     });
   },
   mounted: function() {},
-  destroyed() {},
+  destroyed() {
+    this.searchFilterClear();
+  },
   methods: {
     onActivityCreate() {
       this.$store.commit("ACTIVITY_POPUP_TOGGLE");
@@ -77,21 +78,34 @@ export default {
       const bottomPage = visible + scrollY >= pageHeight;
       return bottomPage || pageHeight < visible;
     },
-    loadActivities() {      
-      this.$store
-          .dispatch("LOAD_ACTIVITIES", this.offset)
-          .then(chunk => {
-              this.activities = chunk && Array.isArray(chunk) ? 
-                                [...this.activities, ...chunk] : this.activities;
-          })
-      this.offset = this.offset + settings.search.limit;
+    searchFilterClear() {
+      this.$store.dispatch("SEARCH_FILTER_RESET");
+    },
+    reload() {
+      this.activities = [];
+      this.searchFilterClear();
+      this.loadActivities();
+    },
+    loadActivities() {
+      this.$store.dispatch("LOAD_ACTIVITIES").then(chunk => {
+        this.activities =
+          chunk && Array.isArray(chunk)
+            ? [...this.activities, ...chunk]
+            : this.activities;
+      });
+    },
+    searchActivities(period) {
+      this.searchFilterClear();
+      this.$store.dispatch("SEARCH_ACTIVITIES", period).then(activities => {
+        this.activities = activities ? activities : [];
+      });
     }
   },
   computed: {
     ...mapState(["activitiesLoading"]),
     moveForFabButtonStyle() {
       return "top: 98px; right: 15px;";
-    },
+    }
   },
   watch: {
     bottom(bottom) {
