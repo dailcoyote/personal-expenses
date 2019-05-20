@@ -77,9 +77,6 @@ export default {
       const bottomPage = visible + scrollY >= pageHeight;
       return bottomPage || pageHeight < visible;
     },
-    destroyActivities() {
-      // this.$store.commit("DESTROY_ACTIVITIES");
-    },
     loadActivities() {      
       this.$store
           .dispatch("LOAD_ACTIVITIES", this.offset)
@@ -92,7 +89,6 @@ export default {
   },
   computed: {
     ...mapState(["activitiesLoading"]),
-    // ...mapGetters(["getActivities"])
     moveForFabButtonStyle() {
       return "top: 98px; right: 15px;";
     },

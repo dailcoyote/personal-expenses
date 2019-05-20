@@ -12,12 +12,12 @@ const Service = {
                         title: 'Donations',
                         activityGroup: 'R',
                         value: 40000
-                    }    
+                    }
                 ]
             },
             {
                 date: new Date(2019, 3, 15),
-                transactions:[
+                transactions: [
                     {
                         title: 'Funds withdrawal',
                         activityGroup: 'R',
@@ -37,16 +37,16 @@ const Service = {
                         title: 'Stationery',
                         activityGroup: 'E',
                         value: -300
-                    }            
+                    }
                 ]
-            },{
+            }, {
                 date: new Date(2019, 4, 15),
                 transactions: [
                     {
                         title: 'Issuance of debt',
                         activityGroup: 'E',
                         value: -1000
-                    }    
+                    }
                 ]
             },
             {
@@ -61,7 +61,7 @@ const Service = {
                         title: 'Utilities',
                         activityGroup: 'E',
                         value: -6125.22
-                    }    
+                    }
                 ]
             },
             {
@@ -76,15 +76,15 @@ const Service = {
                         title: 'Basket',
                         activityGroup: 'E',
                         value: -1202
-                    }    
+                    }
                 ]
             }
         ]
-     },
+    },
     orderList() {
         this.db.activityStore.sort((prev, current) => {
-            if(prev.date.getTime() > current.date.getTime()) return -1
-            else if(prev.date.getTime() < current.date.getTime()) return 1;
+            if (prev.date.getTime() > current.date.getTime()) return -1
+            else if (prev.date.getTime() < current.date.getTime()) return 1;
             else return 0;
         })
     },
@@ -96,25 +96,25 @@ const Service = {
         return this.db.activityStore;
     },
     async loadActivities(offset) {
-        if(this.db.activityStore.length >= offset) {
+        if (this.db.activityStore.length >= offset) {
             this.orderList(this.db.activityStore);
             return [...this.db.activityStore.slice(offset, offset + Settings.search.limit)];
         }
         return false;
     },
     async save(activity) {
-        const _now = new Date();  
-        const transactionId = this.transactionId();     
+        const _now = new Date();
+        const transactionId = this.transactionId();
         const indx = _.findIndex(this.db.activityStore, (l) => {
             return l.date.getMonth() == _now.getMonth()
-            && l.date.getDate() == _now.getDate() 
-            && l.date.getFullYear() == _now.getFullYear() 
+                && l.date.getDate() == _now.getDate()
+                && l.date.getFullYear() == _now.getFullYear()
         });
         activity["transactionId"] = transactionId;
-        if(indx >= 0){
+        if (indx >= 0) {
             this.db.activityStore[indx]["transactions"].push(activity);
         }
-        else{
+        else {
             const newItem = {
                 date: new Date(),
                 transactions: []
@@ -122,7 +122,7 @@ const Service = {
             newItem.transactions.push(activity);
             this.db.activityStore.push(newItem)
         }
-        await timeout(); 
+        await timeout();
         return transactionId;
     }
 }
