@@ -21,7 +21,7 @@
           <v-flex md1 d-flex mb-2 :key="rootIndx">
             <activity-card-list
               v-bind:title="activity.date"
-              v-bind:items="activity.listOf"
+              v-bind:items="activity.transactions"
               :currency="currency"
             ></activity-card-list>
           </v-flex>

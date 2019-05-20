@@ -42,7 +42,8 @@ export default {
                     icon: "trending_up",
                     color: "success",
                     percentBalance: 0,
-                    income: 0
+                    income: 0,
+                    expenses: 0
                 }
             }
         }

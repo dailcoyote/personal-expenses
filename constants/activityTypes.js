@@ -1,5 +1,5 @@
 const ACTIVITY_GROUPS = {
-    "R": "Replenishment", "E": "Expense"
+    R: "R", E: "E"
 }
 
 const ACTIVITY_TYPES = {

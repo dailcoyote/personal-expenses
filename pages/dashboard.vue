@@ -14,6 +14,7 @@
             :color="dashboardTools.stat.expenditures.month.color"
             :value="dashboardTools.stat.expenditures.month.percentBalance"
             :income="dashboardTools.stat.expenditures.month.income"
+            :expenses="dashboardTools.stat.expenditures.month.expenses"
             :currency="currency"
           >
           </circle-statistic>

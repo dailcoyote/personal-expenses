@@ -92,11 +92,12 @@ export default {
       validatorPromise.then(async (success) => {
         if (success) {
           const cost = parseInt(this.form["value"]);
-          const newActivity = { ...this.form };
-          newActivity["value"] = newActivity.activityGroup === ACTIVITY_GROUPS.E 
-                                 ? cost - (cost * 2) : cost; 
-          const transactionId = await ActivityAPI.save(newActivity);                       
-          this.$store.dispatch("NEW_TRANSACTION_CREATED", transactionId)
+          const newActivity = { 
+            ...this.form,
+            value: this.form.activityGroup === ACTIVITY_GROUPS.E 
+                                 ? cost - (cost * 2) : cost
+          };                      
+          this.$store.dispatch("TRANSACTION_CREATE", newActivity)
           this.$router.push({path: "/activities"})          
         }
       });

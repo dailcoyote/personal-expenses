@@ -15,8 +15,9 @@ const actions = {
         commit('ACTIVITY_API_DATA_LOADED');
         return activities;
     },
-    async NEW_TRANSACTION_CREATED({ commit, dispatch, state }, newActivityTransactionId) {
-        commit('ACTIVITY_TRANSACTION_ID_COMMIT', newActivityTransactionId);
+    async TRANSACTION_CREATE({ commit, dispatch, state }, newActivity) {
+        const transactionId = await ActivityAPI.save(newActivity);                       
+        commit('ACTIVITY_TRANSACTION_ID_COMMIT', transactionId);
         dispatch('UPDATE_DASHBOARD')
     },
     async UPDATE_DASHBOARD({ commit, state }){

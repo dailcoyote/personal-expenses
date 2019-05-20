@@ -7,7 +7,7 @@ const Service = {
         activityStore: [
             {
                 date: new Date(2019, 4, 1),
-                listOf: [
+                transactions: [
                     {
                         title: 'Donations',
                         activityGroup: 'R',
@@ -17,7 +17,7 @@ const Service = {
             },
             {
                 date: new Date(2019, 3, 15),
-                listOf:[
+                transactions:[
                     {
                         title: 'Funds withdrawal',
                         activityGroup: 'R',
@@ -41,7 +41,7 @@ const Service = {
                 ]
             },{
                 date: new Date(2019, 4, 15),
-                listOf: [
+                transactions: [
                     {
                         title: 'Issuance of debt',
                         activityGroup: 'E',
@@ -51,7 +51,7 @@ const Service = {
             },
             {
                 date: new Date(2019, 4, 17),
-                listOf: [
+                transactions: [
                     {
                         title: 'Smoke',
                         activityGroup: 'E',
@@ -66,7 +66,7 @@ const Service = {
             },
             {
                 date: new Date(2019, 1, 15),
-                listOf: [
+                transactions: [
                     {
                         title: 'Basket',
                         activityGroup: 'E',
@@ -112,14 +112,14 @@ const Service = {
         });
         activity["transactionId"] = transactionId;
         if(indx >= 0){
-            this.db.activityStore[indx]["listOf"].push(activity);
+            this.db.activityStore[indx]["transactions"].push(activity);
         }
         else{
             const newItem = {
                 date: new Date(),
-                listOf: []
+                transactions: []
             };
-            newItem.listOf.push(activity);
+            newItem.transactions.push(activity);
             this.db.activityStore.push(newItem)
         }
         await timeout(); 
