@@ -49,11 +49,8 @@ const Dashboard = {
     },
     processing(activities) {
         const now = new Date();
-        const beginMonth = new Date(now.getFullYear(), now.getMonth(), 1)
-
-        console.log("processing", activities)
+        const beginMonth = new Date(now.getFullYear(), now.getMonth(), 1);
         const stat = _.reduce(activities, function (accumulator, activity) {
-            console.log("activity", activity, "accumulator", JSON.stringify(accumulator))
             _.forEach(activity.transactions, function (item) {
                 if (item.activityGroup == ACTIVITY_GROUPS.E) {
                     accumulator.totalCosts += item.value;
@@ -77,7 +74,6 @@ const Dashboard = {
                 accumulator.monthlyProfit =
                     accumulator.monthlyInCome - accumulator.monthlyExpenses
             }
-            console.log(accumulator)
             return accumulator;
         }, Object.assign({}, this.budgetBlank))
         this.generateStatistic(stat);

@@ -12,6 +12,11 @@ const state = () => ({
     newActivityTransactionId: undefined,
     activityPopupForm: {
         isOpen: false
+    },
+    alert: {
+        message: "",
+        color: "error",
+        show: false
     }
 })
 

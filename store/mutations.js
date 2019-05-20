@@ -8,7 +8,15 @@ const mutations = {
     },
     DRAWER(state, val){
         state.drawer = val;
-    },  
+    },
+    ALERT_COMMIT(state, msg) {
+        state.alert.message = msg;
+        state.alert.show = true;
+    },
+    ALERT_CLEAR(state) {
+        state.alert.message = "";
+        state.alert.show = false;
+    },
     ACTIVITY_POPUP_TOGGLE(state) {
         state.activityPopupForm.isOpen = !state.activityPopupForm.isOpen;
     },

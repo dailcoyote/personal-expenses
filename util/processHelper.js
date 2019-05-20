@@ -1,5 +1,5 @@
-const timeout = () => {
-    return new Promise(resolve => setTimeout(resolve, 600));
+const timeout = (wait=600) => {
+    return new Promise(resolve => setTimeout(resolve, wait));
 }
 
 const generateID = () => {

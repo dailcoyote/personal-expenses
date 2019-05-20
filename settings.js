@@ -1,4 +1,7 @@
 export default {
+    snackbar: {
+        timeout: 6500
+    },
     currency: {
         code: "&#x20B8",
         name: "KZT"

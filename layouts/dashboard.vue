@@ -10,6 +10,7 @@
           <div class="page-wrapper">
             <nuxt/>
           </div>
+          <snackbar :show="show" :text="snackbarMessage" :color="snackbarColor"></snackbar>
           <!-- App Footer -->
           <v-footer height="auto" class="pa-3 app--footer">
             <h5>&copy; {{ new Date().getFullYear() }}. DailCoyote</h5>
@@ -23,24 +24,27 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import AppDrawer from "@/components/AppDrawer";
 import AppToolbar from "@/components/AppToolbar";
 import PageHeader from "@/components/PageHeader";
+import Snackbar from "@/components/widgets/Snackbar";
 
 export default {
   components: {
     AppDrawer,
     AppToolbar,
-    PageHeader
+    PageHeader,
+    Snackbar
   },
   data: () => ({
     expanded: true,
-    rightDrawer: false,
-    snackbar: {
-      show: false,
-      text: "",
-      color: ""
-    }
+    rightDrawer: false
+  }),
+  computed: mapState({
+      snackbarMessage(state){ return state.alert.message.substr() },
+      snackbarColor(state){ return state.alert.color.substr() },
+      show: state => state.alert.show
   })
 };
 </script>
