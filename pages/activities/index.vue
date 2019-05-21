@@ -15,7 +15,7 @@
     </v-btn>
     <v404 v-if="!activities.length"></v404>
     <v-container v-else grid-list-lg fluid my-2>
-      <search-filter :reload="reload" :searchActivities="searchActivities"></search-filter>
+      <search-filter :cardListReload="cardListReload" :searchActivities="searchActivities"></search-filter>
       <v-layout column wrap ma-0 v-if="!activitiesLoading && activities">
         <template v-for="(activity, rootIndx) in activities">
           <v-flex md1 d-flex mb-2 :key="rootIndx">
@@ -81,7 +81,7 @@ export default {
     searchFilterClear() {
       this.$store.dispatch("SEARCH_FILTER_RESET");
     },
-    reload() {
+    cardListReload() {
       this.activities = [];
       this.searchFilterClear();
       this.loadActivities();

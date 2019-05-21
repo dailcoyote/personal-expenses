@@ -63,7 +63,7 @@
               </v-layout>
               <v-layout row justify-center>
                 <v-flex xs12 sm12 md6 my-3 row>
-                  <v-btn block v-if="search.filterChipEnabled" color="#40668e" dark @click="onSearch()">Apply</v-btn>
+                  <v-btn block :disabled="!search.filterChipEnabled" color="#40668e" dark @click="onSearch()">Apply</v-btn>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -99,7 +99,7 @@ import settings from "@/settings";
 export default {
   props: {
     searchActivities: Function,
-    reload: Function
+    cardListReload: Function
   },
   data: () => ({
     filterByGroup: [...settings.search.filter.filterByGroup],
@@ -128,7 +128,7 @@ export default {
     },
     onFilterItemRemoved: function() {
       this.resetFilter();
-      this.reload();
+      this.cardListReload();
     },
     onSearch: function() {
       this.search.dialog = !this.search.dialog;
