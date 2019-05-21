@@ -7,8 +7,6 @@ const state = () => ({
     isLoading: false,
     drawer: true,
     activitiesLoading: false,
-    activityStore: [],
-    activities: [],
     newActivityTransactionId: undefined,
     search: {
         activities: {
