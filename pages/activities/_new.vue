@@ -2,47 +2,48 @@
   <div id="page-forms">
     <v-container grid-list-xl fluid my-2>
       <v-layout row wrap justify-center>
-        <v-flex lg6>
-          <v-card class="mb-4">
-            <v-toolbar :color="formColorTheme" dark flat dense cad>
-              <v-icon>{{params.icon}}</v-icon>
-              <v-toolbar-title class="subheading">{{form.title + " Form"}}</v-toolbar-title>
-              <v-spacer></v-spacer>
-            </v-toolbar>
-            <v-divider></v-divider>
-            <v-card-text class="px-4">
-              <v-form class="px-1" v-model="valid">
-                <v-subheader class="pa-0 my-2">Activity Detail</v-subheader>
-                <div class="d-flex my-2">
-                  <v-text-field
-                    :label="formCostLabel"
-                    :prefix="formCostSigned"
-                    :suffix="currency"
-                    mask="#######"
-                    :rules="[rules.required]"
-                    :error-messages="errors.collect('value')"
-                    v-model="form.value"
-                    data-vv-name="value"
-                    v-validate="'required'"
-                    :color="formColorTheme"
-                  ></v-text-field>
-                </div>
-                <div class="d-flex my-2">
-                  <v-textarea
-                    name="input-7-1"
-                    label="Activity Description"
-                    :color="formColorTheme"
-                    value
-                    v-model="form.description"
-                    hint
-                  ></v-textarea>
-                </div>
-                <div class="d-flex my-2">
-                  <v-btn block :color="formColorTheme" dark @click="submit()">Create Activity</v-btn>
-                </div>
-              </v-form>
-            </v-card-text>
-          </v-card>
+        <v-flex xs10 lg5>
+          <!-- <v-card>
+          <v-card-text>-->
+          <!-- <v-toolbar :color="formColorTheme" dark flat dense cad>
+            <v-icon>{{params.icon}}</v-icon>
+            <v-toolbar-title class="subheading">{{form.title + " Form"}}</v-toolbar-title>
+            <v-spacer></v-spacer>
+          </v-toolbar>-->
+          <span class="title">{{form.title + " Form"}}</span>
+          <v-subheader class="pa-0 mt-4 mb-2">Activity Detail</v-subheader>
+          <!-- <v-divider></v-divider> -->
+          <v-form v-model="valid" class="py-2">
+            <div class="d-flex my-2">
+              <v-text-field
+                :label="formCostLabel"
+                :prefix="formCostSigned"
+                :suffix="currency"
+                mask="#######"
+                :rules="[rules.required]"
+                :error-messages="errors.collect('value')"
+                v-model="form.value"
+                data-vv-name="value"
+                v-validate="'required'"
+                :color="formColorTheme"
+              ></v-text-field>
+            </div>
+            <div class="d-flex my-2">
+              <v-textarea
+                name="input-7-1"
+                label="Activity Description"
+                :color="formColorTheme"
+                value
+                v-model="form.description"
+                hint
+              ></v-textarea>
+            </div>
+            <div class="d-flex mt-4 mb-2">
+              <v-btn block :color="formColorTheme" dark :disabled="!valid" @click="submit()">Create Activity</v-btn>
+            </div>
+          </v-form>
+          <!-- </v-card-text>
+          </v-card>-->
         </v-flex>
       </v-layout>
     </v-container>
@@ -89,16 +90,18 @@ export default {
   methods: {
     submit() {
       const validatorPromise = this.$validator.validateAll();
-      validatorPromise.then(async (success) => {
+      validatorPromise.then(async success => {
         if (success) {
           const cost = parseInt(this.form["value"]);
-          const newActivity = { 
+          const newActivity = {
             ...this.form,
-            value: this.form.activityGroup === ACTIVITY_GROUPS.E 
-                                 ? cost - (cost * 2) : cost
-          };                      
-          this.$store.dispatch("TRANSACTION_CREATE", newActivity)
-          this.$router.push({path: "/activities"})          
+            value:
+              this.form.activityGroup === ACTIVITY_GROUPS.E
+                ? cost - cost * 2
+                : cost
+          };
+          this.$store.dispatch("TRANSACTION_CREATE", newActivity);
+          this.$router.push({ path: "/activities" });
         }
       });
     }

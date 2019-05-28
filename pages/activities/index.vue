@@ -14,11 +14,11 @@
       <v-icon>add</v-icon>
     </v-btn>
     <v404 v-if="!activities.length"></v404>
-    <v-container v-else grid-list-lg fluid my-2>
+    <v-container v-else grid-list-lg fluid>
       <search-filter :cardListReload="cardListReload" :searchActivities="searchActivities"></search-filter>
-      <v-layout column wrap ma-0 v-if="!activitiesLoading && activities">
+      <v-layout column wrap v-if="!activitiesLoading && activities">
         <template v-for="(activity, rootIndx) in activities">
-          <v-flex md1 d-flex mb-2 :key="rootIndx">
+          <v-flex md1 my-0 d-flex :key="rootIndx">
             <activity-card-list
               v-bind:title="activity.date"
               v-bind:items="activity.transactions"

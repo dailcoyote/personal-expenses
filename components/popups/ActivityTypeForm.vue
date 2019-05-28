@@ -16,7 +16,7 @@
       <v-card-text class="pa-0">
         <!-- Replenishment -->
         <v-layout wrap>
-          <v-flex xs12 sm12 md12 mb-3>
+          <v-flex xs12 sm12 md12>
             <activity-type-form-list
               title="Replenishment"
               :listOf="activitiesOfReplenishment"

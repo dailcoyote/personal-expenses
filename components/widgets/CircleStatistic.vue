@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="elevation-4">
     <v-card-title>
       <div class="layout row ma-0 justify-space-between">
         <div class="subheading">{{title}}</div>
