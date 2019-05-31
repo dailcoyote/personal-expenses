@@ -3,10 +3,14 @@ import { now } from 'moment';
 import Settings from "@/settings";
 
 const mutations = {
-    TOGGLE_DRAWER(state){
+    DISABLE_DRAWER(state) {
+        if (state.drawer)
+            state.drawer = !state.drawer;
+    },
+    TOGGLE_DRAWER(state) {
         state.drawer = !state.drawer;
     },
-    DRAWER(state, val){
+    DRAWER(state, val) {
         state.drawer = val;
     },
     ALERT_COMMIT(state, msg) {
@@ -33,22 +37,22 @@ const mutations = {
         state.search.activities.filter.startDate = filter.startDate;
         state.search.activities.filter.endDate = filter.endDate;
     },
-    DASHBOARD_API_BEGIN_LOADING(state){
+    DASHBOARD_API_BEGIN_LOADING(state) {
         state.isLoading = !state.isLoading;
     },
-    DASHBOARD_COMMIT(state, dashboard){
+    DASHBOARD_COMMIT(state, dashboard) {
         state.dashboardTools = JSON.parse(JSON.stringify(dashboard));
     },
     DASHBOARD_API_DATA_LOADED(state) {
         state.isLoading = !state.isLoading;
     },
-    ACTIVITY_API_BEGIN_LOADING(state){
+    ACTIVITY_API_BEGIN_LOADING(state) {
         state.activitiesLoading = !state.activitiesLoading;
     },
-    ACTIVITY_API_DATA_LOADED(state){
+    ACTIVITY_API_DATA_LOADED(state) {
         state.activitiesLoading = !state.activitiesLoading;
     },
-    ACTIVITY_TRANSACTION_ID_COMMIT(state, id){
+    ACTIVITY_TRANSACTION_ID_COMMIT(state, id) {
         state.newActivityTransactionId = id;
     }
 }

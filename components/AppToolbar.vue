@@ -5,9 +5,9 @@
     dark
     app
   >
-    <v-toolbar-title class="ml-0 pl-3">
+    <!-- <v-toolbar-title class="ml-0 pl-3">
       <v-toolbar-side-icon @click.stop="toggleDrawer()"></v-toolbar-side-icon>
-    </v-toolbar-title>
+    </v-toolbar-title> -->
     <v-spacer></v-spacer>
     <v-btn icon href="https://github.com/dailcoyote/MyExpenses">
       <v-icon>fa-2x fa-github</v-icon>
