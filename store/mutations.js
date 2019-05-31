@@ -21,8 +21,8 @@ const mutations = {
         state.alert.message = "";
         state.alert.show = false;
     },
-    ACTIVITY_POPUP_TOGGLE(state) {
-        state.activityPopupForm.isOpen = !state.activityPopupForm.isOpen;
+    ACTIVITY_TYPE_SHEET_TOGGLE(state) {
+        state.activityTypeSheet = !state.activityTypeSheet;
     },
     ACTIVITY_API_OFFSET(state, offset) {
         state.search.activities.filter.offset = offset;

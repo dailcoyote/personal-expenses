@@ -18,9 +18,7 @@ const state = () => ({
             loaded: false
         }
     },
-    activityPopupForm: {
-        isOpen: false
-    },
+    activityTypeSheet: false,
     alert: {
         message: "",
         color: "error",

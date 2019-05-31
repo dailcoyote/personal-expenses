@@ -10,6 +10,7 @@
             <v-toolbar-title class="subheading">{{form.title + " Form"}}</v-toolbar-title>
             <v-spacer></v-spacer>
           </v-toolbar>-->
+          <v-icon>{{params.icon}}</v-icon>
           <span class="title">{{form.title + " Form"}}</span>
           <v-subheader class="pa-0 mt-4 mb-2">Activity Detail</v-subheader>
           <!-- <v-divider></v-divider> -->

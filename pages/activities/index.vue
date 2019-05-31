@@ -31,7 +31,7 @@
         <v-progress-circular :size="60" color="primary" indeterminate ma-auto></v-progress-circular>
       </v-layout>
     </v-container>
-    <activity-type-form></activity-type-form>
+    <activity-type-tiles></activity-type-tiles>
   </div>
 </template>
 
@@ -42,7 +42,7 @@ import settings from "@/settings";
 import V404 from "@/components/notifications/v404";
 import SearchFilter from "@/components/list/SearchFilter";
 import ActivityCardList from "@/components/widgets/ActivityCardList";
-import ActivityTypeForm from "@/components/popups/ActivityTypeForm";
+import ActivityTypeTiles from "@/components/popups/ActivityTypeTiles";
 
 export default {
   layout: "dashboard",
@@ -50,7 +50,7 @@ export default {
     V404,
     SearchFilter,
     ActivityCardList,
-    ActivityTypeForm
+    ActivityTypeTiles
   },
   data: () => ({
     currency: settings.currency.code,
@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     onActivityCreate() {
-      this.$store.commit("ACTIVITY_POPUP_TOGGLE");
+      this.$store.commit("ACTIVITY_TYPE_SHEET_TOGGLE");
     },
     bottomVisible() {
       const scrollY = window.scrollY;
