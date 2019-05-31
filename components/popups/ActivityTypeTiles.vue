@@ -1,16 +1,22 @@
 <template>
   <v-bottom-sheet v-model="activityTypeSheet">
-      <v-list class="scroll-y">
-        <v-subheader>Create new activity</v-subheader>
-        <v-list-tile v-for="tile in tiles" :key="tile.text" @click="onActivityTypeSelected(tile)">
-          <v-list-tile-avatar class="">
+    <v-card>
+      <v-card-text>
+         Create new activity
+      </v-card-text>
+      <v-divider></v-divider>
+      <v-layout row wrap py-4>
+        <v-flex v-for="tile in tiles" :key="tile.text" 
+                @click="onActivityTypeSelected(tile)" class="card_clickable" xs4 lg3>
+          <v-layout column align-center class="text-xs-center">
             <v-avatar size="32px" :color="tile.color">
               <v-icon dark>{{tile.icon}}</v-icon>
             </v-avatar>
-          </v-list-tile-avatar>
-          <v-list-tile-title class="px-1">{{ tile.text }}</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
+            <v-card-text>{{ tile.text }}</v-card-text>
+          </v-layout>
+        </v-flex>
+      </v-layout>
+    </v-card>
   </v-bottom-sheet>
 </template>
 
@@ -19,9 +25,7 @@ import { mapState } from "vuex";
 import { ACTIVITY_TYPES, ACTIVITY_GROUPS } from "@/constants/activityTypes";
 
 export default {
-  data: () => ({
-    
-  }),
+  data: () => ({}),
   methods: {
     popupClose() {
       this.$store.commit("ACTIVITY_TYPE_SHEET_TOGGLE");
@@ -53,3 +57,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.card_clickable {
+  cursor: pointer;
+}
+</style>
+
