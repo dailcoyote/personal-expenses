@@ -39,7 +39,7 @@
 import { mapState, mapGetters } from "vuex";
 import Moment from "moment";
 import settings from "@/settings";
-import V404 from "@/components/notifications/v404";
+import V404 from "@/components/info/v404";
 import SearchFilter from "@/components/widgets/SearchFilter";
 import ActivityCardList from "@/components/widgets/ActivityCardList";
 import ActivityTypeTiles from "@/components/popups/ActivityTypeTiles";
