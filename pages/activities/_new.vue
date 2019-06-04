@@ -3,28 +3,19 @@
     <v-container grid-list-xl fluid my-2>
       <v-layout row wrap justify-center>
         <v-flex xs10 lg5>
-          <!-- <v-card>
-          <v-card-text>-->
-          <!-- <v-toolbar :color="formColorTheme" dark flat dense cad>
-            <v-icon>{{params.icon}}</v-icon>
-            <v-toolbar-title class="subheading">{{form.title + " Form"}}</v-toolbar-title>
-            <v-spacer></v-spacer>
-          </v-toolbar>-->
-          <v-icon>{{params.icon}}</v-icon>
-          <span class="title">{{form.title + " Form"}}</span>
           <v-subheader class="pa-0 mt-4 mb-2">Activity Detail</v-subheader>
           <!-- <v-divider></v-divider> -->
-          <v-form v-model="valid" class="py-2">
+          <v-form ref="form" v-model="valid" class="py-2">
             <div class="d-flex my-2">
               <v-text-field
                 :label="formCostLabel"
                 :prefix="formCostSigned"
                 :suffix="currency"
-                mask="#######"
+                type="number"
                 :rules="[rules.required]"
+                v-model="activity.value"
+                @input="onValueChange"
                 :error-messages="errors.collect('value')"
-                v-model="form.value"
-                data-vv-name="value"
                 v-validate="'required'"
                 :color="formColorTheme"
               ></v-text-field>
@@ -35,16 +26,11 @@
                 label="Activity Description"
                 :color="formColorTheme"
                 value
-                v-model="form.description"
+                v-model="activity.description"
                 hint
               ></v-textarea>
             </div>
-            <div class="d-flex mt-4 mb-2">
-              <v-btn block :color="formColorTheme" dark :disabled="!valid" @click="submit()">Create Activity</v-btn>
-            </div>
           </v-form>
-          <!-- </v-card-text>
-          </v-card>-->
         </v-flex>
       </v-layout>
     </v-container>
@@ -52,18 +38,15 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import settings from "@/settings";
 import { ACTIVITY_GROUPS } from "@/constants/activityTypes";
 import ActivityAPI from "@/api/activities";
 
 export default {
-  layout: "dashboard",
+  layout: "activity",
   data: () => ({
     dictionary: {
-      attributes: {
-        //email: "E-mail Address"
-        // custom attributes
-      },
       custom: {
         value: {
           required: () => "Value can not be empty"
@@ -75,53 +58,59 @@ export default {
     rules: {
       required: value => !!value || "Required."
     },
-    valid: true,
-    form: {
-      title: "",
-      activityGroup: "",
-      value: "",
-      description: ""
-    }
+    valid: true
   }),
+  created() {},
   mounted() {
-    this.form.title = `${this.$route.query.text}`;
-    this.form.activityGroup = this.$route.query.group;
-    this.$validator.localize("en", this.dictionary);
+    this.activity.title = this.activity.title || this.activityType.text;
+    this.activity.group = this.activity.group || this.activityType.group;
+  },
+  destroyed() {
+    this.$store.commit("ACTIVITY_SUBMIT_RESET");
+    this.$store.commit("ACTIVITY_FORM_VALID", false);
   },
   methods: {
-    submit() {
-      const validatorPromise = this.$validator.validateAll();
-      validatorPromise.then(async success => {
-        if (success) {
-          const cost = parseInt(this.form["value"]);
-          const newActivity = {
-            ...this.form,
-            value:
-              this.form.activityGroup === ACTIVITY_GROUPS.E
-                ? cost - cost * 2
-                : cost
-          };
-          this.$store.dispatch("TRANSACTION_CREATE", newActivity);
-          this.$router.push({ path: "/activities" });
-        }
-      });
+    onValueChange(val) {
+      let valueCheck = false;
+      if (val && /^[0-9]*$/gm.test(val)) 
+        valueCheck = true;
+      this.$store.commit("ACTIVITY_FORM_VALID", valueCheck);
+    },
+    async submit() {
+      const validatorResult = await this.$validator.validateAll();
+      if (validatorResult) {
+        this.activity.value =
+          this.activityType.group === ACTIVITY_GROUPS.E
+            ? parseInt(this.activity.value - this.activity.value * 2)
+            : parseInt(this.activity.value);
+        this.$store.dispatch("TRANSACTION_CREATE", { ...this.activity });
+        this.$router.push({ path: "/activities" });
+      }
     }
   },
   computed: {
+    ...mapState(["activitySubmitRequest", "activityType"]),
+    activity: {
+      get: function() {
+        return this.$store.getters.activity;
+      }
+    },
     formCostLabel() {
-      return this.$route.query.group === ACTIVITY_GROUPS.R ? "Debit" : "Credit";
+      return this.activityType.group === ACTIVITY_GROUPS.R ? "Debit" : "Credit";
     },
     formCostSigned() {
-      return this.$route.query.group === ACTIVITY_GROUPS.R ? "+ " : "- ";
+      return this.activityType.group === ACTIVITY_GROUPS.R ? "+ " : "- ";
     },
     formColorTheme() {
-      return this.$route.query.color;
+      return this.activityType.color;
     },
     currency() {
       return settings.currency.name;
-    },
-    params() {
-      return this.$route.query;
+    }
+  },
+  watch: {
+    activitySubmitRequest(val) {
+      if(val) this.submit();
     }
   }
 };

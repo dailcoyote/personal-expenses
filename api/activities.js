@@ -10,7 +10,7 @@ const Service = {
                 transactions: [
                     {
                         title: 'Donations',
-                        activityGroup: 'R',
+                        group: 'R',
                         value: 40000
                     }
                 ]
@@ -20,22 +20,22 @@ const Service = {
                 transactions: [
                     {
                         title: 'Funds withdrawal',
-                        activityGroup: 'R',
+                        group: 'R',
                         value: 39200
                     },
                     {
                         title: 'Market',
-                        activityGroup: 'E',
+                        group: 'E',
                         value: -12100
                     },
                     {
                         title: 'Basket',
-                        activityGroup: 'E',
+                        group: 'E',
                         value: -4150
                     },
                     {
                         title: 'Stationery',
-                        activityGroup: 'E',
+                        group: 'E',
                         value: -300
                     }
                 ]
@@ -44,7 +44,7 @@ const Service = {
                 transactions: [
                     {
                         title: 'Issuance of debt',
-                        activityGroup: 'E',
+                        group: 'E',
                         value: -1000
                     }
                 ]
@@ -54,12 +54,12 @@ const Service = {
                 transactions: [
                     {
                         title: 'Smoke',
-                        activityGroup: 'E',
+                        group: 'E',
                         value: -6900
                     },
                     {
                         title: 'Utilities',
-                        activityGroup: 'E',
+                        group: 'E',
                         value: -6125.22
                     }
                 ]
@@ -69,12 +69,12 @@ const Service = {
                 transactions: [
                     {
                         title: 'Basket',
-                        activityGroup: 'E',
+                        group: 'E',
                         value: -6900
                     },
                     {
                         title: 'Basket',
-                        activityGroup: 'E',
+                        group: 'E',
                         value: -1202
                     }
                 ]

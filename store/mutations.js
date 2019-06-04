@@ -52,8 +52,29 @@ const mutations = {
     ACTIVITY_API_DATA_LOADED(state) {
         state.activitiesLoading = !state.activitiesLoading;
     },
+    ACTIVITY_FORM_DRAFT(state, { type, activity }) {
+        if (activity)
+            state.activity = activity;
+        if (type)
+            state.activityType = type;
+    },
+    ACTIVITY_FORM_VALID(state, val) {
+        state.activityFormValid = val;
+    },
     ACTIVITY_TRANSACTION_ID_COMMIT(state, id) {
         state.newActivityTransactionId = id;
+    },
+    ACTIVITY_SUBMIT_REQUEST(state) {
+        state.activitySubmitRequest = true;
+    },
+    ACTIVITY_SUBMIT_RESET(state) {
+        state.activitySubmitRequest = false;
+        state.activity = {
+            title: "",
+            group: "",
+            value: "",
+            description: ""
+        }
     }
 }
 

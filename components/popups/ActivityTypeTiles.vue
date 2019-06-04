@@ -32,9 +32,9 @@ export default {
     },
     onActivityTypeSelected(selectedItem) {
       this.popupClose();
+      this.$store.commit('ACTIVITY_FORM_DRAFT', {type:{...selectedItem}})
       this.$router.push({
-        path: "/activities/_new",
-        query: { ...selectedItem }
+        path: "/activities/_new"
       });
     }
   },

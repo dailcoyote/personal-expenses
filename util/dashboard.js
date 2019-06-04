@@ -52,7 +52,7 @@ const Dashboard = {
         const beginMonth = new Date(now.getFullYear(), now.getMonth(), 1);
         const stat = _.reduce(activities, function (accumulator, activity) {
             _.forEach(activity.transactions, function (item) {
-                if (item.activityGroup == ACTIVITY_GROUPS.E) {
+                if (item.group == ACTIVITY_GROUPS.E) {
                     accumulator.totalCosts += item.value;
                     if (activity.date.getTime() >= beginMonth.getTime())
                         accumulator.monthlyExpenses -= item.value;
@@ -61,7 +61,7 @@ const Dashboard = {
                     else if (item.title === ACTIVITY_TYPES["Utilities"].text)
                         accumulator.bank -= -item.value;
                 }
-                else if (item.activityGroup == ACTIVITY_GROUPS.R) {
+                else if (item.group == ACTIVITY_GROUPS.R) {
                     if (activity.date.getTime() >= beginMonth.getTime())
                         accumulator.monthlyInCome += item.value;
                     if (item.title === ACTIVITY_TYPES["Debt coming"].text)

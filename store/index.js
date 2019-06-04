@@ -8,6 +8,20 @@ const state = () => ({
     drawer: true,
     activitiesLoading: false,
     newActivityTransactionId: undefined,
+    activitySubmitRequest: false,
+    activityFormValid: false,
+    activity: {
+        title: "",
+        group: "",
+        value: "",
+        description: ""
+    },
+    activityType: {
+        group: "",
+        color: "",
+        icon: "",
+        text: ""
+    },
     search: {
         activities: {
             filter: {

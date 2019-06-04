@@ -54,6 +54,7 @@ const actions = {
     },
     async TRANSACTION_CREATE({ commit, dispatch, state }, newActivity) {
         try {
+            console.log(newActivity)
             const transactionId = await ActivityAPI.save(newActivity);
             commit('ACTIVITY_TRANSACTION_ID_COMMIT', transactionId);
             dispatch('REFRESH_DASHBOARD')
