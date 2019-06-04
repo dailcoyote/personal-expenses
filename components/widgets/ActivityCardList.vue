@@ -25,8 +25,8 @@
 
 <script>
 import Moment from "moment";
-import ActivityAvatar from "@/components/list/ActivityAvatar";
-import ActivityListItemLabel from "@/components/list/ActivityListItemLabel";
+import ActivityAvatar from "@/components/list_items/ActivityAvatar";
+import ActivityListItemLabel from "@/components/list_items/ActivityListItemLabel";
 
 export default {
   props: {
