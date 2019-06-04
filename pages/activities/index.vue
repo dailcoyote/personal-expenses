@@ -1,21 +1,11 @@
 <template>
   <div id="pageActivityList">
-    <v-btn
-      color="#40668e"
-      small
-      dark
-      fixed
-      top
-      right
-      fab
-      :style="moveForFabButtonStyle"
-      @click="onActivityCreate()"
-    >
+    <v-btn color="#40668e" dark fixed right bottom fab :style="addFabBtn" @click="onActivityCreate()">
       <v-icon>add</v-icon>
     </v-btn>
     <v404 v-if="!activities.length"></v404>
     <v-container v-else grid-list-lg fluid>
-      <search-filter :cardListReload="cardListReload" :searchActivities="searchActivities"></search-filter>
+      <!-- <search-filter :cardListReload="cardListReload" :searchActivities="searchActivities"></search-filter> -->
       <v-layout column wrap v-if="!activitiesLoading && activities">
         <template v-for="(activity, rootIndx) in activities">
           <v-flex md1 my-0 d-flex :key="rootIndx">
@@ -103,8 +93,8 @@ export default {
   },
   computed: {
     ...mapState(["activitiesLoading"]),
-    moveForFabButtonStyle() {
-      return "top: 98px; right: 15px;";
+    addFabBtn() {
+      return "bottom: 40px; right: 10px;";
     }
   },
   watch: {

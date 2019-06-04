@@ -9,11 +9,11 @@
       <v-toolbar-side-icon @click.stop="toggleDrawer()"></v-toolbar-side-icon>
     </v-toolbar-title> -->
     <v-spacer></v-spacer>
+    <v-btn icon>
+        <v-icon>filter_list</v-icon>
+    </v-btn>
     <v-btn icon href="https://github.com/dailcoyote/MyExpenses">
       <v-icon>fa-2x fa-github</v-icon>
-    </v-btn>
-    <v-btn icon @click="handleFullScreen()">
-      <v-icon>fullscreen</v-icon>
     </v-btn>
     <v-menu offset-y origin="center center" :nudge-right="140" :nudge-bottom="10" transition="scale-transition">
       <v-btn icon large flat slot="activator">
@@ -68,9 +68,6 @@ export default {
     methods: {
       toggleDrawer() {
         this.$store.commit('TOGGLE_DRAWER')
-      },
-      handleFullScreen() {
-        // Util.toggleFullScreen();
       }
     }
 }
