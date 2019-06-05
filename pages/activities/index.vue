@@ -1,6 +1,15 @@
 <template>
-  <div id="pageActivityList">
-    <v-btn color="#40668e" dark fixed right bottom fab :style="addFabBtn" @click="onActivityCreate()">
+  <div id="pageActivityList" v-scroll="onScroll">
+    <v-btn
+      color="#40668e"
+      dark
+      fixed
+      right
+      bottom
+      fab
+      :style="addFabBtn"
+      @click="onActivityCreate()"
+    >
       <v-icon>add</v-icon>
     </v-btn>
     <v404 v-if="!activities.length"></v404>
@@ -49,9 +58,6 @@ export default {
   }),
   created: function() {
     this.loadActivities();
-    window.addEventListener("scroll", () => {
-      this.bottom = this.bottomVisible();
-    });
   },
   mounted: function() {},
   destroyed() {
@@ -61,10 +67,10 @@ export default {
     onActivityCreate() {
       this.$store.commit("ACTIVITY_TYPE_SHEET_TOGGLE");
     },
-    bottomVisible() {
+    bottomVisible(scrollingElement) {
       const scrollY = window.scrollY;
-      const visible = document.documentElement.clientHeight;
-      const pageHeight = document.documentElement.scrollHeight;
+      const visible = scrollingElement.clientHeight;
+      const pageHeight = scrollingElement.scrollHeight;
       const bottomPage = visible + scrollY >= pageHeight;
       return bottomPage || pageHeight < visible;
     },
@@ -89,6 +95,9 @@ export default {
       this.$store.dispatch("SEARCH_ACTIVITIES", period).then(activities => {
         this.activities = activities ? activities : [];
       });
+    },
+    onScroll(e) {
+      this.bottom = this.bottomVisible(e.target.scrollingElement);
     }
   },
   computed: {
