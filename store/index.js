@@ -1,11 +1,13 @@
 import mutations from "@/store/mutations";
 import actions from "@/store/actions";
 import getters from "@/store/getters";
+import menu from "@/api/menu";
 
 const state = () => ({
     dashboardTools: undefined,
     isLoading: false,
     drawer: true,
+    bottomNavSection: menu[1].name,
     activitiesLoading: false,
     newActivityTransactionId: undefined,
     activitySubmitRequest: false,

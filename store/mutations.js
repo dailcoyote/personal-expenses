@@ -13,6 +13,9 @@ const mutations = {
     DRAWER(state, val) {
         state.drawer = val;
     },
+    SWITCH_NAVIGATION(state, val) {
+        state.bottomNavSection = val;
+    },
     ALERT_COMMIT(state, msg) {
         state.alert.message = msg;
         state.alert.show = true;

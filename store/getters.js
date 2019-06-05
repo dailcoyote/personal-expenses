@@ -10,7 +10,8 @@ const getters = {
     },
     filterChip: state => state.search.activities.chip,
     activitySubmitRequest: state => state.activitySubmitRequest,
-    searchDialog: state => state.search.dialog
+    searchDialog: state => state.search.dialog,
+    bottomNavSection: state => state.bottomNavSection
 }
 
 export default getters;
