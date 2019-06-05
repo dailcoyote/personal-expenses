@@ -25,25 +25,29 @@ export default {
                 id: "S",
                 title: "Budget",
                 value: 0,
-                indicatorState: "A"
+                indicatorState: "A",
+                backgroundColor: "#ffcb9e"
             },
             {
                 id: "D",
                 title: "Debt",
                 value: 0,
-                indicatorState: "A"
+                indicatorState: "A",
+                backgroundColor: "#d9ddf7"
             },
             {
                 id: "TC",
                 title: "Total Costs",
                 value: 0,
-                indicatorState: "A"
+                indicatorState: "A",
+                backgroundColor: "#fff"
             },
             {
                 id: "B",
                 title: "Bank",
                 value: 0,
-                indicatorState: "A"
+                indicatorState: "A",
+                backgroundColor: "#e0bd73"
             }
         ],
         stat: {

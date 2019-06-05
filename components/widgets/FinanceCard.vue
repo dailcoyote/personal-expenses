@@ -1,5 +1,5 @@
 <template>
-  <v-card class="elevation-4">
+  <v-card class="elevation-4" :color="backgroundColor">
     <div class="layout row ma-0 px-1">
       <div class="text-box align-center justify-space-between">
         <v-card-text>
@@ -22,7 +22,8 @@ export default {
     title: String,
     value: Number,
     currency: String,
-    indicatorState: String
+    indicatorState: String,
+    backgroundColor: String
   },
   mounted: function() {},
   methods: {
@@ -37,6 +38,7 @@ export default {
     indicatorClass: function() {
       let cssClassObj = {
         subheading: true,
+        "font-weight-regular": true,
         "green--text": false,
         "red--text": false,
         "grey--text": false
@@ -49,7 +51,7 @@ export default {
           cssClassObj["green--text"] = true;
           break;
         default:
-          cssClassObj["grey--text"] = true;
+          cssClassObj["black--text"] = true;
       }
       return cssClassObj;
     }
