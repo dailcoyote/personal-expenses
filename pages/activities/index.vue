@@ -70,6 +70,7 @@ export default {
   mounted: function() {},
   destroyed() {
     this.searchFilterClear();
+    this.activitiesClearFromStore();
   },
   methods: {
     onActivityCreate() {
@@ -86,6 +87,9 @@ export default {
       // this.activities = [];
       this.searchFilterClear();
       this.loadActivities();
+    },
+    activitiesClearFromStore() {
+      this.$store.commit("ACTIVITIES_CLEAR");
     },
     loadActivities() {
       this.$store.dispatch("LOAD_ACTIVITIES");
