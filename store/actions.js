@@ -28,33 +28,24 @@ const actions = {
             commit('ACTIVITY_API_BEGIN_LOADING');
             const activities = await ActivityAPI.loadActivities(state.search.activities.filter);
             const offsetNext = state.search.activities.filter.offset + Settings.search.limit
-            commit('ACTIVITY_API_OFFSET', offsetNext);
-            commit('ACTIVITY_API_DATA_LOADED');
-            return activities;
+            commit('ACTIVITY_API_OFFSET_NEXT', offsetNext);            
+            commit('ACTIVITY_API_DATA_LOADED', activities);
         } catch (e) {
             dispatch('PUSH_ERROR', e.message || e)
         }
     },
-    async SEARCH_ACTIVITIES({ commit, state, dispatch }, datePeriod) {
-        try {
-            const searchFilter = { ...datePeriod, offset: state.search.activities.filter.offset };
-            const offsetNext = state.search.activities.filter.offset + Settings.search.limit
-            commit('ACTIVITY_API_BEGIN_LOADING');
-            commit('ACTIVITY_API_FILTER_MUTATE', searchFilter);
-            const activities = await ActivityAPI.search(searchFilter);
-            commit('ACTIVITY_API_OFFSET', offsetNext);
-            commit('ACTIVITY_API_DATA_LOADED');
-            return activities;
-        } catch (e) {
-            dispatch('PUSH_ERROR', e.message || e)
-        }
+    async SEARCH_ACTIVITIES({ commit, state, dispatch }, {filter, chip}) {
+        commit("ACTIVITY_API_FILTER_MUTATE", filter);
+        commit("ACTIVITY_SET_FILTER_CHIP", chip);
+        commit("ACTIVITIES_CLEAR");
+        dispatch("LOAD_ACTIVITIES");        
     },
+
     SEARCH_FILTER_RESET({ commit }) {
         commit('ACTIVITY_API_FILTER_RESET');
     },
     async TRANSACTION_CREATE({ commit, dispatch, state }, newActivity) {
         try {
-            console.log(newActivity)
             const transactionId = await ActivityAPI.save(newActivity);
             commit('ACTIVITY_TRANSACTION_ID_COMMIT', transactionId);
             dispatch('REFRESH_DASHBOARD')

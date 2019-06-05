@@ -14,7 +14,18 @@
     </v-btn>
     <v404 v-if="!activities.length"></v404>
     <v-container v-else grid-list-lg fluid>
-      <!-- <search-filter :cardListReload="cardListReload" :searchActivities="searchActivities"></search-filter> -->
+      <v-layout row wrap justify-center>
+        <div slot="widget-content" lg6 md-4 sm12 xs12>
+          <div class="text-sm-left text-lg-left">
+            <v-chip v-model="searchFilterChip.active" color="teal" text-color="white">
+              <v-avatar>
+                <v-icon>check_circle</v-icon>
+              </v-avatar>
+              {{searchFilterChip.label}}
+            </v-chip>
+          </div>
+        </div>
+      </v-layout>
       <v-layout column wrap v-if="!activitiesLoading && activities">
         <template v-for="(activity, rootIndx) in activities">
           <v-flex md1 my-0 d-flex :key="rootIndx">
@@ -39,7 +50,6 @@ import { mapState, mapGetters } from "vuex";
 import Moment from "moment";
 import settings from "@/settings";
 import V404 from "@/components/info/v404";
-import SearchFilter from "@/components/widgets/SearchFilter";
 import ActivityCardList from "@/components/widgets/ActivityCardList";
 import ActivityTypeTiles from "@/components/popups/ActivityTypeTiles";
 
@@ -47,14 +57,12 @@ export default {
   layout: "dashboard",
   components: {
     V404,
-    SearchFilter,
     ActivityCardList,
     ActivityTypeTiles
   },
   data: () => ({
     currency: settings.currency.code,
-    bottom: false,
-    activities: []
+    bottom: false
   }),
   created: function() {
     this.loadActivities();
@@ -74,36 +82,34 @@ export default {
       const bottomPage = visible + scrollY >= pageHeight;
       return bottomPage || pageHeight < visible;
     },
-    searchFilterClear() {
-      this.$store.dispatch("SEARCH_FILTER_RESET");
-    },
     cardListReload() {
-      this.activities = [];
+      // this.activities = [];
       this.searchFilterClear();
       this.loadActivities();
     },
     loadActivities() {
-      this.$store.dispatch("LOAD_ACTIVITIES").then(chunk => {
-        this.activities =
-          chunk && Array.isArray(chunk)
-            ? [...this.activities, ...chunk]
-            : this.activities;
-      });
+      this.$store.dispatch("LOAD_ACTIVITIES");
     },
-    searchActivities(period) {
+    searchFilterClear() {
+      this.$store.dispatch("SEARCH_FILTER_RESET");
+    },
+    searchActivities() {
       this.searchFilterClear();
-      this.$store.dispatch("SEARCH_ACTIVITIES", period).then(activities => {
-        this.activities = activities ? activities : [];
-      });
+      this.$store.dispatch("SEARCH_ACTIVITIES")
     },
     onScroll(e) {
       this.bottom = this.bottomVisible(e.target.scrollingElement);
     }
   },
   computed: {
-    ...mapState(["activitiesLoading"]),
+    ...mapState(["activitiesLoading", "activities"]),
     addFabBtn() {
       return "bottom: 40px; right: 10px;";
+    },
+    searchFilterChip: {
+      get() {
+        return this.$store.getters.filterChip;
+      }
     }
   },
   watch: {

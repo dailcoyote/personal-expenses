@@ -106,6 +106,7 @@ const Service = {
         return false;
     },
     async search({ startDate, offset = 0 }) {
+        console.log(startDate)
         if (this.db.activityStore.length >= offset) {
             this.orderList(this.db.activityStore);
             const filtered = this.db.activityStore.filter((activity, indx) => {

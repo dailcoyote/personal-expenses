@@ -24,7 +24,7 @@ const mutations = {
     ACTIVITY_TYPE_SHEET_TOGGLE(state) {
         state.activityTypeSheet = !state.activityTypeSheet;
     },
-    ACTIVITY_API_OFFSET(state, offset) {
+    ACTIVITY_API_OFFSET_NEXT(state, offset) {
         state.search.activities.filter.offset = offset;
     },
     ACTIVITY_API_FILTER_RESET(state) {
@@ -33,9 +33,12 @@ const mutations = {
         state.search.activities.filter.endDate = undefined;
     },
     ACTIVITY_API_FILTER_MUTATE(state, filter) {
-        state.search.activities.filter.offset = filter.offset;
+        state.search.activities.filter.offset = 0;
         state.search.activities.filter.startDate = filter.startDate;
         state.search.activities.filter.endDate = filter.endDate;
+    },
+    ACTIVITY_SET_FILTER_CHIP(state, chip) {
+        state.search.activities.chip = chip;
     },
     DASHBOARD_API_BEGIN_LOADING(state) {
         state.isLoading = !state.isLoading;
@@ -49,8 +52,13 @@ const mutations = {
     ACTIVITY_API_BEGIN_LOADING(state) {
         state.activitiesLoading = !state.activitiesLoading;
     },
-    ACTIVITY_API_DATA_LOADED(state) {
+    ACTIVITIES_CLEAR(state) {
+        state.activities = [];
+    },
+    ACTIVITY_API_DATA_LOADED(state, activities) {
         state.activitiesLoading = !state.activitiesLoading;
+        state.activities = activities && Array.isArray(activities) 
+            ? [...state.activities, ...activities] : state.activities;
     },
     ACTIVITY_FORM_DRAFT(state, { type, activity }) {
         if (activity)

@@ -10,6 +10,7 @@ const state = () => ({
     newActivityTransactionId: undefined,
     activitySubmitRequest: false,
     activityFormValid: false,
+    activities: [],
     activity: {
         title: "",
         group: "",
@@ -29,8 +30,19 @@ const state = () => ({
                 startDate: undefined,
                 endDate: undefined
             },
+            chip: {
+                label: "",
+                active: false
+            },
             loaded: false
-        }
+        },
+        filter: {
+            label: "",
+            chip: false,
+            startDate: undefined,
+            endDate: undefined
+        },
+        dialog: false
     },
     activityTypeSheet: false,
     alert: {
