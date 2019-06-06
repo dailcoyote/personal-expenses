@@ -17,7 +17,7 @@
               ></span>
             </v-list-tile-action>
           </v-list-tile>
-          <v-divider :key="index"></v-divider>
+          <v-divider v-if="index < cards.length - 1" :key="index"></v-divider>
         </template>
       </v-list>
     </v-card-text>
