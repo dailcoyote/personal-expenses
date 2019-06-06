@@ -77,6 +77,20 @@ const mutations = {
     ACTIVITY_FORM_VALID(state, val) {
         state.activityFormValid = val;
     },
+    ACTIVITY_DETAIL_OPEN(state, activityDetail) {
+        state.activityDetailOpen = true;
+        state.activity = activityDetail;
+    },
+    ACTIVITY_DETAIL_CLOSE(state) {
+        state.activityDetailOpen = false;
+        state.activity = {
+            dateTime: undefined,
+            title: "",
+            group: "",
+            value: "",
+            description: ""
+        }
+    },
     ACTIVITY_TRANSACTION_ID_COMMIT(state, id) {
         state.newActivityTransactionId = id;
     },
@@ -86,6 +100,7 @@ const mutations = {
     ACTIVITY_SUBMIT_RESET(state) {
         state.activitySubmitRequest = false;
         state.activity = {
+            dateTime: undefined,
             title: "",
             group: "",
             value: "",

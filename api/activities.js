@@ -11,7 +11,8 @@ const Service = {
                     {
                         title: 'Donations',
                         group: 'R',
-                        value: 40000
+                        value: 40000,
+                        transactionId:"c00At9q"
                     }
                 ]
             },
@@ -21,22 +22,26 @@ const Service = {
                     {
                         title: 'Funds withdrawal',
                         group: 'R',
-                        value: 39200
+                        value: 39200,
+                        transactionId:"12s6wxxx"
                     },
                     {
                         title: 'Market',
                         group: 'E',
-                        value: -12100
+                        value: -12100,
+                        transactionId:"QWED233"
                     },
                     {
                         title: 'Basket',
                         group: 'E',
-                        value: -4150
+                        value: -4150,
+                        transactionId:"320sawW"
                     },
                     {
                         title: 'Stationery',
                         group: 'E',
-                        value: -300
+                        value: -300,
+                        transactionId:"cBAAt955"
                     }
                 ]
             }, {
@@ -45,7 +50,8 @@ const Service = {
                     {
                         title: 'Issuance of debt',
                         group: 'E',
-                        value: -1000
+                        value: -1000,
+                        transactionId:"322At9q"
                     }
                 ]
             },
@@ -55,12 +61,14 @@ const Service = {
                     {
                         title: 'Smoke',
                         group: 'E',
-                        value: -6900
+                        value: -6900,
+                        transactionId:"126tQW"
                     },
                     {
                         title: 'Utilities',
                         group: 'E',
-                        value: -6125.22
+                        value: -6125.22,
+                        transactionId:"c66At9q"
                     }
                 ]
             },
@@ -70,12 +78,8 @@ const Service = {
                     {
                         title: 'Basket',
                         group: 'E',
-                        value: -6900
-                    },
-                    {
-                        title: 'Basket',
-                        group: 'E',
-                        value: -1202
+                        value: -6900,
+                        transactionId:"3699At9q"
                     }
                 ]
             }

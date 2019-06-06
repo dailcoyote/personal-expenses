@@ -9,6 +9,7 @@ const getters = {
         return {...state.activity};
     },
     toolbarFilter: state => state.toolbar.filter,
+    activityDetailOpen: state => state.activityDetailOpen,
     filterChip: state => state.search.activities.chip,
     activitySubmitRequest: state => state.activitySubmitRequest,
     searchDialog: state => state.search.dialog,

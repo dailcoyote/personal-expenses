@@ -9,7 +9,7 @@
     <v-card-text class="pa-0">
       <v-list two-line class="pa-0">
         <template v-for="(item, index) in items">
-          <v-list-tile avatar :key="item.title+index" @click="handleClick">
+          <v-list-tile avatar :key="item.title+index" @click="activityDetailView(item)">
             <activity-avatar :activityName="item.title.toString()"></activity-avatar>
             <v-list-tile-content>
               <v-list-tile-sub-title v-html="item.title" class="subtitle"></v-list-tile-sub-title>
@@ -44,8 +44,11 @@ export default {
     }
   },
   methods: {
-    handleClick: e => {
-      console.log(e);
+    activityDetailView(item) {
+      this.$store.dispatch("ACTIVITY_DETAIL_OPEN", {
+        ...item,
+        dateTime: this.title
+      });
     }
   }
 };

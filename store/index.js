@@ -16,8 +16,10 @@ const state = () => ({
     newActivityTransactionId: undefined,
     activitySubmitRequest: false,
     activityFormValid: false,
+    activityDetailOpen: false,
     activities: [],
     activity: {
+        dateTime: undefined,
         title: "",
         group: "",
         value: "",

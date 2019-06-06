@@ -47,6 +47,9 @@ const actions = {
             active: false
         });
     },
+    ACTIVITY_DETAIL_OPEN({ commit, state}, activityDetail) {
+        commit("ACTIVITY_DETAIL_OPEN", activityDetail);
+    },
     async TRANSACTION_CREATE({ commit, dispatch, state }, newActivity) {
         try {
             const transactionId = await ActivityAPI.save(newActivity);

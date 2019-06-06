@@ -48,6 +48,8 @@
         <v-icon class="font-size: 24px;">expand_more</v-icon>
       </v-btn>
     </v-layout>
+    <!-- ACTIVITY DETAIL -->
+    <activity-detail></activity-detail>
     <!-- TILES POPUP -->
     <activity-type-tiles></activity-type-tiles>
   </div>
@@ -61,6 +63,7 @@ import { isMobile } from "@/util/client";
 import V404 from "@/components/info/v404";
 import ActivityCardList from "@/components/widgets/ActivityCardList";
 import ActivityTypeTiles from "@/components/popups/ActivityTypeTiles";
+import ActivityDetail from "@/components/popups/ActivityDetail";
 
 export default {
   layout: "dashboard",
@@ -70,7 +73,8 @@ export default {
   components: {
     V404,
     ActivityCardList,
-    ActivityTypeTiles
+    ActivityTypeTiles,
+    ActivityDetail
   },
   data: () => ({
     currency: settings.currency.code,
