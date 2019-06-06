@@ -31,28 +31,32 @@ export default {
                 title: "Budget",
                 value: 0,
                 indicatorState: "A",
-                backgroundColor: "#ffcb9e"
+                backgroundColor: "#ffcb9e",
+                avatar: "/dashboard/cash-in-hand.png"
             },
             {
                 id: "D",
                 title: "Debt",
                 value: 0,
                 indicatorState: "A",
-                backgroundColor: "#d9ddf7"
+                backgroundColor: "#d9ddf7",
+                avatar: "/dashboard/debt.png"
             },
             {
                 id: "TC",
                 title: "Total Costs",
                 value: 0,
                 indicatorState: "A",
-                backgroundColor: "#fff"
+                backgroundColor: "#fff",
+                avatar: "/dashboard/budget.png"
             },
             {
                 id: "B",
                 title: "Bank",
                 value: 0,
                 indicatorState: "A",
-                backgroundColor: "#e0bd73"
+                backgroundColor: "#e0bd73",
+                avatar: "/dashboard/credit-card.png"
             }
         ],
         stat: {

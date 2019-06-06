@@ -3,12 +3,10 @@
     <v-container grid-list-lg fluid px-4>
       <template v-if="!isLoading && dashboardTools">
         <v-layout row wrap>
-          <v-flex v-for="(item) in dashboardTools.cards" v-bind:key="item.id" md3 lg3 sm12 xs6>
-            <finance-card v-bind="item" :currency="currency"></finance-card>
+          <v-flex lg7 sm12 xs12>
+            <finance-card :cards="dashboardTools.cards" :currency="currency"></finance-card>
           </v-flex>
-        </v-layout>
-        <v-layout row>
-          <v-flex lg4 sm12 xs12>
+          <v-flex lg5 sm12 xs12>
             <circle-statistic
               :title="dashboardTools.stat.expenditures.month.title"
               :sub-title="dashboardTools.stat.expenditures.month.subTitle"

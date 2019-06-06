@@ -1,15 +1,26 @@
 <template>
-  <v-card class="elevation-4" :color="backgroundColor">
-    <div class="layout row ma-0 px-1">
-      <div class="text-box align-center justify-space-between">
-        <v-card-text>
-          <div class="title">{{title}}</div>
-        </v-card-text>
-        <v-card-text>
-          <span v-bind:class="indicatorClass" v-html="monetary"></span>
-        </v-card-text>
-      </div>
-    </div>
+  <v-card class="elevation-6">
+    <v-card-text>
+      <v-list>
+        <template v-for="(item, index) in cards">
+          <v-list-tile :key="item.title" avatar>
+            <v-list-tile-avatar>
+              <img :src="item.avatar">
+            </v-list-tile-avatar>
+            <v-list-tile-content>
+              <v-list-tile-title v-text="item.title"></v-list-tile-title>
+            </v-list-tile-content>
+            <v-list-tile-action>
+              <span
+                v-bind:class="indicatorClass(item.indicatorState)"
+                v-html="monetary(item.value)"
+              ></span>
+            </v-list-tile-action>
+          </v-list-tile>
+          <v-divider :key="index"></v-divider>
+        </template>
+      </v-list>
+    </v-card-text>
   </v-card>
 </template>
 
@@ -18,24 +29,15 @@ import { _format } from "@/util/formatter";
 
 export default {
   props: {
-    // card: Object
-    title: String,
-    value: Number,
     currency: String,
-    indicatorState: String,
-    backgroundColor: String
+    cards: Array
   },
   mounted: function() {},
   methods: {
-    moneyFormat: function() {
-      return _format(this.value, "0,0");
-    }
-  },
-  computed: {
-    monetary() {
-      return this.moneyFormat() + " " + this.currency;
+    monetary(value) {
+      return _format(value, "0,0") + " " + this.currency;
     },
-    indicatorClass: function() {
+    indicatorClass: function(indicatorState) {
       let cssClassObj = {
         subheading: true,
         "font-weight-regular": true,
@@ -43,7 +45,7 @@ export default {
         "red--text": false,
         "grey--text": false
       };
-      switch (this.indicatorState) {
+      switch (indicatorState) {
         case "R":
           cssClassObj["red--text"] = true;
           break;
@@ -55,7 +57,8 @@ export default {
       }
       return cssClassObj;
     }
-  }
+  },
+  computed: {}
 };
 </script>
 
