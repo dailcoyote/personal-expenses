@@ -1,12 +1,12 @@
 <template>
   <v-dialog v-model="popup" persistent>
     <v-card>
-      <v-btn icon color="" @click="closePopup()">
+      <v-card-title>
+        <v-btn icon color @click="closePopup()">
           <v-icon>close</v-icon>
         </v-btn>
-      <card-text>
         <span class="title grey--text">{{activity.title}}</span>
-      </card-text>
+      </v-card-title>
       <v-divider></v-divider>
       <v-card-text>
         <v-container grid-list-md>
@@ -72,9 +72,9 @@ export default {
     }
   },
   methods: {
-      closePopup() {
-        this.$store.commit("ACTIVITY_DETAIL_CLOSE");
-      }
+    closePopup() {
+      this.$store.commit("ACTIVITY_DETAIL_CLOSE");
+    }
   }
 };
 </script>
