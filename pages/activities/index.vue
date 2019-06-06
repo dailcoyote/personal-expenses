@@ -119,7 +119,7 @@ export default {
   computed: {
     ...mapState(["activitiesLoading", "activities"]),
     addFabBtn() {
-      return "bottom: 40px; right: 10px;";
+      return "bottom: 58px; right: 10px;";
     },
     searchFilterChip: {
       get() {
