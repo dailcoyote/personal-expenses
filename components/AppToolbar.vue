@@ -4,6 +4,7 @@
       <v-toolbar-side-icon @click.stop="toggleDrawer()"></v-toolbar-side-icon>
     </v-toolbar-title>-->
     <v-spacer></v-spacer>
+    <!-- FILTER COMPONENT -->
     <v-menu
       offset-y
       origin="center center"
@@ -13,7 +14,7 @@
       transition="scale-transition"
     >
       <template v-slot:activator="{ on }">
-        <v-btn icon v-on="on">
+        <v-btn icon v-on="on" v-show="toolbar.on">
           <v-icon>filter_list</v-icon>
         </v-btn>
       </template>
@@ -76,6 +77,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import settings from "@/settings";
 
 export default {
@@ -104,7 +106,10 @@ export default {
       selected: ""
     }
   }),
+  mounted() {
+  },
   computed: {
+    ...mapState(["toolbar"]),
     toolbarColor() {
       return this.$vuetify.options.extra.mainNav;
     },

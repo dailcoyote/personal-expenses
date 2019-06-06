@@ -24,6 +24,9 @@ const mutations = {
         state.alert.message = "";
         state.alert.show = false;
     },
+    FILTER_TOOLBAR_TOGGLE(state) {
+        state.toolbar.on = !state.toolbar.on;
+    },
     ACTIVITY_TYPE_SHEET_TOGGLE(state) {
         state.activityTypeSheet = !state.activityTypeSheet;
     },

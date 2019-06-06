@@ -43,6 +43,7 @@
         <v-progress-circular :size="60" color="primary" indeterminate ma-auto></v-progress-circular>
       </v-layout>
     </v-container>
+    <!-- TILES POPUP -->
     <activity-type-tiles></activity-type-tiles>
   </div>
 </template>
@@ -67,11 +68,13 @@ export default {
     bottom: false
   }),
   created: function() {
+    this.searchFilterToggle();
     this.loadActivities();
   },
   mounted: function() {},
   destroyed() {
     this.searchFilterClear();
+    this.searchFilterToggle();
     this.activitiesClearFromStore();
   },
   methods: {
@@ -95,6 +98,9 @@ export default {
     },
     loadActivities() {
       this.$store.dispatch("LOAD_ACTIVITIES");
+    },
+    searchFilterToggle() {
+      this.$store.commit("FILTER_TOOLBAR_TOGGLE");
     },
     searchFilterClear() {
       this.$store.dispatch("SEARCH_FILTER_RESET");

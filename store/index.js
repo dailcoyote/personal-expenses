@@ -10,6 +10,7 @@ const state = () => ({
     bottomNavSection: menu[1].name,
     toolbar: {
         filter: false,
+        on: false
     },
     activitiesLoading: false,
     newActivityTransactionId: undefined,
