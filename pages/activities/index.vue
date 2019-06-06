@@ -58,6 +58,9 @@ import ActivityTypeTiles from "@/components/popups/ActivityTypeTiles";
 
 export default {
   layout: "dashboard",
+  head: {
+    title: settings.heads.activities
+  },
   components: {
     V404,
     ActivityCardList,

@@ -39,6 +39,9 @@ import CircleStatistic from "@/components/widgets/CircleStatistic";
 
 export default {
   layout: "dashboard",
+  head: {
+    title: settings.heads.dashboard
+  },
   components: {
     FinanceCard,
     CircleStatistic

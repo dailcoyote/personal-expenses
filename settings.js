@@ -1,6 +1,11 @@
 import moment from "moment";
 
 export default {
+    heads: {
+        dashboard: `MyExpenses | Dashboard`,
+        activities: `MyExpenses | Activities`,
+        newActivity: `MyExpenses | New Activity Form`
+    },
     snackbar: {
         timeout: 6500
     },

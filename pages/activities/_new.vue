@@ -45,6 +45,9 @@ import ActivityAPI from "@/api/activities";
 
 export default {
   layout: "activity",
+  head: {
+    title: `${settings.heads.newActivity}`
+  },
   data: () => ({
     dictionary: {
       custom: {
