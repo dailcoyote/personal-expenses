@@ -1,6 +1,6 @@
 <template>
   <v-bottom-nav id="appBottonNavigator" app :active.sync="bottomNavSection" 
-                :value="true" light fixed shift>
+                :value="true" light fixed>
     <template v-for="(item, index) in menus">
       <v-btn color="#40668e" flat :value="item.name" :key="item.name+index">
         <span>{{item.title}}</span>
@@ -25,7 +25,7 @@ export default {
     // console.log("Browser href", this.$route.path)
     // console.log("Nav name", this.bottomNavSection)
     let nav = menu.find(r=> this.$route.path===r.href);
-    if(nav.name !== this.bottomNavSection) {
+    if(nav && nav.name !== this.bottomNavSection) {
       this.restoreNavigation = true;
       this.bottomNavSection = nav.name;
     }

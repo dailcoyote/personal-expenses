@@ -4,7 +4,7 @@
       <v-list>
         <template v-for="(item, index) in cards">
           <v-list-tile :key="item.title" two-line class="py-2">
-            <v-avatar tile="true">
+            <v-avatar :tile="true">
               <img :src="item.avatar">
             </v-avatar>
             <v-list-tile-content class="pl-4">
