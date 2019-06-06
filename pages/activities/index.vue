@@ -43,6 +43,11 @@
         <v-progress-circular :size="60" color="primary" indeterminate ma-auto></v-progress-circular>
       </v-layout>
     </v-container>
+    <v-layout v-if="isMobile" row wrap align-center justify-center ma-0>
+      <v-btn icon @click="loadActivities()">
+        <v-icon class="font-size: 24px;">expand_more</v-icon>
+      </v-btn>
+    </v-layout>
     <!-- TILES POPUP -->
     <activity-type-tiles></activity-type-tiles>
   </div>
@@ -52,6 +57,7 @@
 import { mapState, mapGetters } from "vuex";
 import Moment from "moment";
 import settings from "@/settings";
+import { isMobile } from "@/util/client";
 import V404 from "@/components/info/v404";
 import ActivityCardList from "@/components/widgets/ActivityCardList";
 import ActivityTypeTiles from "@/components/popups/ActivityTypeTiles";
@@ -68,7 +74,8 @@ export default {
   },
   data: () => ({
     currency: settings.currency.code,
-    bottom: false
+    bottom: false,
+    isMobile: isMobile
   }),
   created: function() {
     this.searchFilterToggle();
@@ -110,7 +117,7 @@ export default {
     },
     searchActivities() {
       this.searchFilterClear();
-      this.$store.dispatch("SEARCH_ACTIVITIES")
+      this.$store.dispatch("SEARCH_ACTIVITIES");
     },
     onScroll(e) {
       this.bottom = this.bottomVisible(e.target.scrollingElement);
