@@ -7,18 +7,13 @@
         <app-bottom-navigator v-if="screen.width<screen.mobileBreakPoint"></app-bottom-navigator>
         <v-content>
           <!-- Page Header -->
-          <page-header></page-header>
+          <!-- <page-header></page-header> -->
           <div class="page-wrapper">
             <nuxt/>
           </div>
           <snackbar :show="show" :text="snackbarMessage" :color="snackbarColor"></snackbar>
-          <!-- App Footer -->
-          <!-- <v-footer height="auto" class="pa-3 app--footer">
-            <h5>&copy; {{ new Date().getFullYear() }}. DailCoyote</h5>
-            <v-spacer></v-spacer>
-            <v-icon color="pink" small>favorite</v-icon>
-          </v-footer>-->
         </v-content>
+        <!-- App Navigation Bottom -->
         <!-- <app-bottom-navigator fixed v-if="screen.width<screen.mobileBreakPoint"></app-bottom-navigator> -->
       </v-app>
     </template>
@@ -30,7 +25,7 @@ import { mapState } from "vuex";
 import AppDrawer from "@/components/AppDrawer";
 import AppToolbar from "@/components/AppToolbar";
 import AppBottomNavigator from "@/components/AppBottomNavigator";
-import PageHeader from "@/components/PageHeader";
+// import PageHeader from "@/components/PageHeader";
 import Snackbar from "@/components/widgets/Snackbar";
 
 export default {
@@ -38,7 +33,7 @@ export default {
     AppDrawer,
     AppToolbar,
     AppBottomNavigator,
-    PageHeader,
+    // PageHeader,
     Snackbar
   },
   data: () => ({
@@ -56,8 +51,8 @@ export default {
   methods: {
     handleResize() {
       this.screen.width = window.innerWidth;
-      if(this.screen.width < this.screen.mobileBreakPoint)
-        this.$store.commit('DISABLE_DRAWER');
+      if (this.screen.width < this.screen.mobileBreakPoint)
+        this.$store.commit("DISABLE_DRAWER");
     }
   },
   computed: mapState({

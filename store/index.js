@@ -8,6 +8,9 @@ const state = () => ({
     isLoading: false,
     drawer: true,
     bottomNavSection: menu[1].name,
+    toolbar: {
+        filter: false,
+    },
     activitiesLoading: false,
     newActivityTransactionId: undefined,
     activitySubmitRequest: false,
@@ -37,12 +40,6 @@ const state = () => ({
                 active: false
             },
             loaded: false
-        },
-        filter: {
-            label: "",
-            chip: false,
-            startDate: undefined,
-            endDate: undefined
         },
         dialog: false
     },

@@ -12,8 +12,8 @@
     >
       <v-icon>add</v-icon>
     </v-btn>
-    <v404 v-if="!activities.length"></v404>
-    <v-container v-else grid-list-lg fluid>
+    <!-- FILTER CHIP SECTION -->
+    <v-container grid-list-lg fluid>
       <v-layout row wrap justify-center>
         <div slot="widget-content" lg6 md-4 sm12 xs12>
           <div class="text-sm-left text-lg-left">
@@ -26,6 +26,8 @@
           </div>
         </div>
       </v-layout>
+      <!-- ACTIVITY UI LIST -->
+      <v404 v-if="!activities.length"></v404>
       <v-layout column wrap v-if="!activitiesLoading && activities">
         <template v-for="(activity, rootIndx) in activities">
           <v-flex md1 my-0 d-flex :key="rootIndx">

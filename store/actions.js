@@ -28,21 +28,24 @@ const actions = {
             commit('ACTIVITY_API_BEGIN_LOADING');
             const activities = await ActivityAPI.loadActivities(state.search.activities.filter);
             const offsetNext = state.search.activities.filter.offset + Settings.search.limit
-            commit('ACTIVITY_API_OFFSET_NEXT', offsetNext);            
+            commit('ACTIVITY_API_OFFSET_NEXT', offsetNext);
             commit('ACTIVITY_API_DATA_LOADED', activities);
         } catch (e) {
             dispatch('PUSH_ERROR', e.message || e)
         }
     },
-    async SEARCH_ACTIVITIES({ commit, state, dispatch }, {filter, chip}) {
+    async SEARCH_ACTIVITIES({ commit, state, dispatch }, { filter, chip }) {
         commit("ACTIVITY_API_FILTER_MUTATE", filter);
         commit("ACTIVITY_SET_FILTER_CHIP", chip);
         commit("ACTIVITIES_CLEAR");
-        dispatch("LOAD_ACTIVITIES");        
+        dispatch("LOAD_ACTIVITIES");
     },
-
     SEARCH_FILTER_RESET({ commit }) {
         commit('ACTIVITY_API_FILTER_RESET');
+        commit("ACTIVITY_SET_FILTER_CHIP", {
+            label: "",
+            active: false
+        });
     },
     async TRANSACTION_CREATE({ commit, dispatch, state }, newActivity) {
         try {

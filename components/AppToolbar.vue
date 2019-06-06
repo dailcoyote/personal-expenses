@@ -107,6 +107,18 @@ export default {
   computed: {
     toolbarColor() {
       return this.$vuetify.options.extra.mainNav;
+    },
+    toolbarFilter: {
+      get() {
+        return this.$store.getters.toolbarFilter;
+      }
+    }
+  },
+  watch: {
+    toolbarFilter(f) {
+      if(!f){
+        this.searchFilter.selected = "";
+      }
     }
   },
   methods: {

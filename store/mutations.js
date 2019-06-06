@@ -34,11 +34,13 @@ const mutations = {
         state.search.activities.filter.offset = 0;
         state.search.activities.filter.startDate = undefined;
         state.search.activities.filter.endDate = undefined;
+        state.toolbar.filter = false;
     },
     ACTIVITY_API_FILTER_MUTATE(state, filter) {
         state.search.activities.filter.offset = 0;
         state.search.activities.filter.startDate = filter.startDate;
         state.search.activities.filter.endDate = filter.endDate;
+        state.toolbar.filter = true;
     },
     ACTIVITY_SET_FILTER_CHIP(state, chip) {
         state.search.activities.chip = chip;
