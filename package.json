@@ -17,7 +17,7 @@
     "cross-env": "^5.2.0",
     "font-awesome": "^4.7.0",
     "lodash.truncate": "^4.4.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "numeral": "^2.0.6",
     "nuxt": "^2.6.3",
     "roboto-fontface": "^0.10.0",
