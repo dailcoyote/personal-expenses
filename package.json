@@ -19,7 +19,7 @@
     "lodash.truncate": "^4.4.2",
     "moment": "^2.24.0",
     "numeral": "^2.0.6",
-    "nuxt": "^2.6.3",
+    "nuxt": "^2.15.8",
     "roboto-fontface": "^0.10.0",
     "vee-validate": "^2.2.5",
     "vue-perfect-scrollbar": "^0.1.0",
